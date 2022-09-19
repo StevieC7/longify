@@ -10,7 +10,7 @@ export default function Home(props) {
     let spotifyState = encodeURIComponent(uuidv4());
     useEffect(() => {
         console.log('use effect ran')
-        localStorage.setItem("spotifyStateKey", spotifyState);
+        localStorage.setItem("spotifyState", spotifyState);
     }, [spotifyState])
     
     // click handler for the "start" button that triggers the auth API call

@@ -10,8 +10,9 @@ export default function Callback(props) {
     }
     // store the state and access token which I'll need later
     const state = getParametersFromHash(useLocation().hash, 'state')
+    // eslint-disable-next-line
     const accessToken = getParametersFromHash(useLocation().hash, 'access\_token')
-    localStorage.setItem('accessTokenKey', accessToken)
+    localStorage.setItem('accessToken', accessToken)
 
     
     // TODO: write something to kick people out if the state returned doesn't match the state stored in local browser storage
@@ -19,7 +20,7 @@ export default function Callback(props) {
         navigate('/make')
     })
 
-    if (state !== localStorage.getItem('spotifyStateKey')) {
+    if (state !== localStorage.getItem('spotifyState')) {
         return(
             <>
             <p>Something has gone wrong. No hacking, please.</p>
@@ -30,7 +31,6 @@ export default function Callback(props) {
     return(
         <>
             <p>This is where I'd put a redirect. IF I HAD ONE</p>
-            <p>{accessToken}</p>
         </>
     )
 }
