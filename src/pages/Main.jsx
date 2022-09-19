@@ -10,7 +10,7 @@ export default function Main(props) {
     }, [userConfig])
     return(
     <>
-        <Configurator setUserConfig={setUserConfig}/>
+        {userConfig.songMix === undefined ? <Configurator setUserConfig={setUserConfig}/> : <></>}
         {userConfig.songMix !== undefined ? <PlaylistPreview userConfig={userConfig}/> : <></>}
     </>
     )
