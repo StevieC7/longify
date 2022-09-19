@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Slider } from "@mui/material";
 
 export default function Configurator({setUserConfig}) {
-    const initialFormState = {}
+    const initialFormState = {songMix: 50, playLength: 3}
     const [formState, setFormState] = useState(initialFormState)
 
     console.log("Configurator has token:",localStorage.getItem('accessToken'))
@@ -43,8 +43,8 @@ export default function Configurator({setUserConfig}) {
     return(
         <div className="configuration">
             {/* Add form here for user to configure their options */}
-            <p>Song Mix</p>
             <div style={{maxWidth: '600px', margin: 'auto'}}>
+                <p>Song Mix</p>
                 <Slider
                     name="songMix"
                     aria-label="Percent Songs"
@@ -52,9 +52,22 @@ export default function Configurator({setUserConfig}) {
                     onChange={(e) => handleChange(e)}
                     valueLabelDisplay='off'
                     step={10}
+                    track={false}
                     marks={songMixMarks}
                     min={30} 
-                    max={70} />
+                    max={70} 
+                    />
+                <p>Play Length</p>
+                <Slider
+                    name="playLength"
+                    aria-label="Time to Fill"
+                    defaultValue={3}
+                    onChange={(e) => handleChange(e)}
+                    valueLabelDisplay='on'
+                    step={1}
+                    min={3}
+                    max={12}
+                />
             </div>
             <button onClick={() => handleClick()}>Get Playlist</button>
         </div>
