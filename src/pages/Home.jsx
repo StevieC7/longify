@@ -17,7 +17,7 @@ export default function Home(props) {
     return(
     <>
         <p>Home</p>
-        <button><a href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientID}&scope=${scope}&redirect_uri=${redirectURL}&state=${spotifyState}`}>Build Playlist</a></button>
+        <button><a href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientID}&scope=${scope}&redirect_uri=${redirectURL}&state=${spotifyState}&show_dialog=true`}>Build Playlist</a></button>
     </>
     )
 }
