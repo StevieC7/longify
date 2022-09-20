@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Slider } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select, Slider } from "@mui/material";
 
 export default function Configurator({setUserConfig}) {
-    const initialFormState = {songMix: 50, playLength: 3}
+    const initialFormState = {songMix: 50, playLength: 3, sortMethod: 'episodesFirst'}
     const [formState, setFormState] = useState(initialFormState)
 
     console.log("Configurator has token:",localStorage.getItem('accessToken'))
@@ -68,6 +68,22 @@ export default function Configurator({setUserConfig}) {
                     min={3}
                     max={12}
                 />
+                <FormControl variant="filled">
+                    <InputLabel id="sort-method-label">Sort Method</InputLabel>
+                    <Select
+                        labelId="sort-method-label"
+                        id="sort-method"
+                        name="sortMethod"
+                        value={formState.sortMethod}
+                        label='Sort Method'
+                        onChange={(e) => handleChange(e)}
+                        >
+                        <MenuItem value={'songsFirst'}>Songs first</MenuItem>
+                        <MenuItem value={'episodesFirst'}>Episodes first</MenuItem>
+                        <MenuItem value={'altSongsFirst'}>Alternate, start with music</MenuItem>
+                        <MenuItem value={'altEpisodesFirst'}>Alternate, start with a podcast</MenuItem>
+                    </Select>
+                </FormControl>
             </div>
             <button onClick={() => handleClick()}>Get Playlist</button>
         </div>
