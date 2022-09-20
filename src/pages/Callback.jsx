@@ -16,9 +16,9 @@ export default function Callback(props) {
 
     
     // TODO: write something to kick people out if the state returned doesn't match the state stored in local browser storage
-    useEffect(() => {
+    // useEffect(() => {
         navigate('/make')
-    })
+    // })
 
     if (state !== localStorage.getItem('spotifyState')) {
         return(
