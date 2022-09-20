@@ -2,7 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 import { HashRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import Main from './pages/Main';
-import Callback from './pages/Callback';
 import './App.css';
 
 function App() {
