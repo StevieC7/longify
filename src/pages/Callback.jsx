@@ -27,10 +27,5 @@ export default function Callback(props) {
         </>
         )
     }
-    // redirect the user here using navigate 
-    return(
-        <>
-            <p>This is where I'd put a redirect. IF I HAD ONE</p>
-        </>
-    )
+    return(<></>)
 }
