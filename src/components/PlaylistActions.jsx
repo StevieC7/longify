@@ -1,7 +1,8 @@
+import { Button } from "@mui/material"
 export default function PlaylistActions(props) {
     return(
         <>
-            <p>PlaylistActions</p>
+            <Button variant="contained">Add to Library</Button>
         </>
     )
 }

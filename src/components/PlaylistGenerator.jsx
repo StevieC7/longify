@@ -55,12 +55,6 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
         }
     }
     console.log('finalplaylistarray:',finalPlaylistArray)
-    
-    return(
-        <div className="playlist">
-            {finalPlaylistArray.map((val) => {return(
-                <p>{val.name ? val.name : val.episode.name}</p>
-            )})}
-        </div>
-    )
+    setPlaylist(finalPlaylistArray)
+    return(<></>)
 }
