@@ -19,35 +19,53 @@ export default function PlaylistGenerator({userConfig, playlist, setPlaylist}) {
     console.log("Total show playtime in minutes:", showLength)
     
     // get a chunk of songs to fill the user's specified time for songs (this is using the bangers only approach for now by grabbing user's top 50 songs, but you can do more if you use tracks endpoint for recommendations based on seed track)
-    let gotSongs;
-    let songList = [];
-    
-    const getSongs = () => {
-        fetch(`${baseSpotifyURL}/me/top/tracks?limit=50`, getSongsInit)
-        .then((res) => res.json())
-        // .then((json) => console.log(json.items))
-        .then((json) => {gotSongs = json.items})
-        // buildSongList()
-        // .then((json) => setPlaylist(json.items))
-        .catch((err) => console.log(err))
-    }
-    
-    // inside each track, target key is duration_ms
-    const buildSongList = async () => {
-        await getSongs()
-        console.log(gotSongs)
-        let songsLengthRunning = 0;
-        while (songsLengthRunning < songLength * 1000 * 60) {
-            songsLengthRunning += gotSongs[0].duration_ms
-            songList.push(gotSongs[0])
-            gotSongs.shift()
+
+    let songList;
+    let episodeList;
+    const getFromSpotify = () => {
+        Promise.all([
+            fetch(`${baseSpotifyURL}/me/top/tracks?limit=50`, getSongsInit), 
+            fetch(`${baseSpotifyURL}/me/episodes?limit=50`, getSongsInit)
+        ])
+        .then((res) => Promise.all(res.map((val) => val.json())))
+        .then((arr) => {
+            songList = arr[0]
+            episodeList = arr[1]
         }
-        console.log(songList)
+        )
     }
+    // setTimeout(() => {
+    //     console.log(songList)
+    //     console.log(episodeList)
+    // }, 5000) 
+    
+    // const getSongs = () => {
+    //     fetch(`${baseSpotifyURL}/me/top/tracks?limit=50`, getSongsInit)
+    //     .then((res) => res.json())
+    //     // .then((json) => console.log(json.items))
+    //     .then((json) => {gotSongs = json.items})
+    //     // buildSongList()
+    //     // .then((json) => setPlaylist(json.items))
+    //     .catch((err) => console.log(err))
+    // }
+    
+    // // inside each track, target key is duration_ms
+    // const buildSongList = async () => {
+    //     await getSongs()
+    //     console.log(gotSongs)
+    //     let songsLengthRunning = 0;
+    //     while (songsLengthRunning < songLength * 1000 * 60) {
+    //         songsLengthRunning += gotSongs[0].duration_ms
+    //         songList.push(gotSongs[0])
+    //         gotSongs.shift()
+    //     }
+    //     console.log(songList)
+    // }
 
     useEffect(() => {
-        buildSongList()
-        console.log("Gotsongs:",gotSongs)
+        getFromSpotify()
+        // buildSongList()
+        // console.log("Gotsongs:",gotSongs)
         // eslint-disable-next-line
     }, [userConfig])
 

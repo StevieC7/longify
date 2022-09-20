@@ -6,7 +6,7 @@ export default function PlaylistPreview({userConfig}) {
     const [playlist, setPlaylist] = useState([])
 
     useEffect(() => {
-        console.log(playlist)
+        // console.log(playlist)
     }, [playlist])
     return(
         <>
