@@ -54,80 +54,105 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
     let finalPlaylistArray = [];
 
     // insert a function that takes in userConfig and selects a sort function from below
-    // altEpisodesFirst()
-    function episodesFirst() {
-        for (let i = 0; i < finalEpisodeList.length; i++) {
-            finalPlaylistArray.push(finalEpisodeList[i])
-        }
-        for (let i = 0; i < finalSongList.length; i++) {
-            finalPlaylistArray.push(finalSongList[i])
-        }
-    }
-    
-    function altEpisodesFirst() {
-        console.log('INSORT final song list:', finalSongList)
-        console.log('INSORT final episode list:', finalEpisodeList)
-        while (finalSongList.length > 0 || finalEpisodeList.length > 0) {
-            console.log('sort while loop running')
-            let fillTime = finalEpisodeList[0].episode.duration_ms
-            let runningFillTime = 0;
-            if (finalEpisodeList.length > 0) {
-                finalPlaylistArray.push(finalEpisodeList[0])
-                finalEpisodeList.shift()
+
+        function episodesFirst() {
+            for (let i = 0; i < finalEpisodeList.length; i++) {
+                finalPlaylistArray.push(finalEpisodeList[i])
             }
-            while (runningFillTime < fillTime) {
-                console.log('song fill while loop running')
-                if (finalSongList.length > 0) {
-                    runningFillTime += finalSongList[0].duration_ms
-                    finalPlaylistArray.push(finalSongList[0])
-                    finalSongList.shift()
-                    console.log('running fill time:', runningFillTime)
-                } else {
-                    runningFillTime = fillTime
+            for (let i = 0; i < finalSongList.length; i++) {
+                finalPlaylistArray.push(finalSongList[i])
+            }
+        }
+        
+        function altEpisodesFirst() {
+            console.log('INSORT final song list:', finalSongList)
+            console.log('INSORT final episode list:', finalEpisodeList)
+            while (finalSongList.length > 0 || finalEpisodeList.length > 0) {
+                console.log('sort while loop running')
+                let fillTime = finalEpisodeList[0].episode.duration_ms
+                let runningFillTime = 0;
+                if (finalEpisodeList.length > 0) {
+                    finalPlaylistArray.push(finalEpisodeList[0])
+                    finalEpisodeList.shift()
+                }
+                while (runningFillTime < fillTime) {
+                    console.log('song fill while loop running')
+                    if (finalSongList.length > 0) {
+                        runningFillTime += finalSongList[0].duration_ms
+                        finalPlaylistArray.push(finalSongList[0])
+                        finalSongList.shift()
+                        console.log('running fill time:', runningFillTime)
+                    } else {
+                        runningFillTime = fillTime
+                    }
                 }
             }
         }
-    }
-    
-    function songsFirst() {
-        for (let i = 0; i < finalSongList.length; i++) {
-            finalPlaylistArray.push(finalSongList[i])
+        
+        function songsFirst() {
+            for (let i = 0; i < finalSongList.length; i++) {
+                finalPlaylistArray.push(finalSongList[i])
+            }
+            for (let i = 0; i < finalEpisodeList.length; i++) {
+                finalPlaylistArray.push(finalEpisodeList[i])
+            }
         }
-        for (let i = 0; i < finalEpisodeList.length; i++) {
-            finalPlaylistArray.push(finalEpisodeList[i])
-        }
-    }
-
-    function altSongsFirst() {
-        console.log('INSORT final song list:', finalSongList)
-        console.log('INSORT final episode list:', finalEpisodeList)
-        while (finalSongList.length > 0 || finalEpisodeList.length > 0) {
-            console.log('sort while loop running')
-            let fillTime = finalEpisodeList[0].episode.duration_ms
-            let runningFillTime = 0;
-            while (runningFillTime < fillTime) {
-                console.log('song fill while loop running')
-                if (finalSongList.length > 0) {
-                    runningFillTime += finalSongList[0].duration_ms
-                    finalPlaylistArray.push(finalSongList[0])
-                    finalSongList.shift()
-                    console.log('running fill time:', runningFillTime)
-                } else {
-                    runningFillTime = fillTime
+        
+        function altSongsFirst() {
+            console.log('INSORT final song list:', finalSongList)
+            console.log('INSORT final episode list:', finalEpisodeList)
+            while (finalSongList.length > 0 || finalEpisodeList.length > 0) {
+                console.log('sort while loop running')
+                let fillTime;
+                let runningFillTime;
+                if (finalEpisodeList.length > 0) {
+                    fillTime = finalEpisodeList[0].episode.duration_ms
+                    runningFillTime = 0;
+                }
+                if (finalSongList.length > 0 && finalEpisodeList.length < 1) {
+                    while (finalSongList.length > 0) {
+                        finalPlaylistArray.push(finalSongList[0])
+                        finalSongList.shift()
+                    }
+                }
+                while (runningFillTime < fillTime) {
+                    console.log('song fill while loop running')
+                    if (finalSongList.length > 0) {
+                        runningFillTime += finalSongList[0].duration_ms
+                        finalPlaylistArray.push(finalSongList[0])
+                        finalSongList.shift()
+                        console.log('running fill time:', runningFillTime)
+                    } else {
+                        runningFillTime = fillTime
+                    }
+                }
+                if (finalEpisodeList.length > 0) {
+                    finalPlaylistArray.push(finalEpisodeList[0])
+                    finalEpisodeList.shift()
                 }
             }
-            if (finalEpisodeList.length > 0) {
-                finalPlaylistArray.push(finalEpisodeList[0])
-                finalEpisodeList.shift()
+        }
+
+        function sortSongs(sortMethod) {
+            if (sortMethod === 'episodesFirst') {
+                return episodesFirst()
+            }
+            if (sortMethod === 'songsFirst') {
+                return songsFirst()
+            }
+            if (sortMethod === 'altEpisodesFirst') {
+                return altEpisodesFirst()
+            }
+            if (sortMethod === 'altSongsFirst') {
+                return altSongsFirst()
             }
         }
+        
+        console.log('finalplaylistarray:',finalPlaylistArray)
+        async function generateFinal() {
+            await sortSongs(userConfig.sortMethod)
+            setPlaylist(finalPlaylistArray)
+        }
+        generateFinal()
+        return(<></>)
     }
-
-    console.log('finalplaylistarray:',finalPlaylistArray)
-    async function generateFinal() {
-        await songsFirst()
-        setPlaylist(finalPlaylistArray)
-    }
-    generateFinal()
-    return(<></>)
-}
