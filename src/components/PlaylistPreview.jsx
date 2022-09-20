@@ -7,10 +7,10 @@ export default function PlaylistPreview({userConfig}) {
     const [fetchedItems, setFetchedItems] = useState({songList: [], episodeList: []})
     const [playlist, setPlaylist] = useState([])
 
-    useEffect(() => {
-        console.log(playlist)
-        console.log(fetchedItems)
-    }, [playlist, fetchedItems])
+    // useEffect(() => {
+    //     console.log(playlist)
+    //     console.log(fetchedItems)
+    // }, [playlist, fetchedItems])
     return(
         <>
             <SpotifyFetcher userConfig={userConfig} setFetchedItems={setFetchedItems}/>
