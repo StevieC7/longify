@@ -22,23 +22,23 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
     // inside each track, target key is duration_ms
     // useEffect(() => {
     // const buildTrackList = () => {
-        let clonedSongs = [...fetchedItems.songList.items]
-        console.log('clonedSongs:',clonedSongs)
-        let songsLengthRunning = 0;
-        while (songsLengthRunning < songLength * 1000 * 60) {
-            songsLengthRunning += clonedSongs[0].duration_ms
-            finalSongList.push(clonedSongs[0])
-            clonedSongs.shift()
-        }
-        console.log(finalSongList)
-        let clonedEpisodes = [...fetchedItems.episodeList.items]
-        let episodesRunningLength = 0;
-        while (episodesRunningLength < showLength * 1000 * 60) {
-            episodesRunningLength += clonedEpisodes[0].episode.duration_ms
-            finalEpisodeList.push(clonedEpisodes[0])
-            clonedEpisodes.shift()
-        }
-        console.log(finalEpisodeList)
+    let clonedSongs = [...fetchedItems.songList.items]
+    console.log('clonedSongs:',clonedSongs)
+    let songsLengthRunning = 0;
+    while (songsLengthRunning < songLength * 1000 * 60) {
+        songsLengthRunning += clonedSongs[0].duration_ms
+        finalSongList.push(clonedSongs[0])
+        clonedSongs.shift()
+    }
+    console.log(finalSongList)
+    let clonedEpisodes = [...fetchedItems.episodeList.items]
+    let episodesRunningLength = 0;
+    while (episodesRunningLength < showLength * 1000 * 60) {
+        episodesRunningLength += clonedEpisodes[0].episode.duration_ms
+        finalEpisodeList.push(clonedEpisodes[0])
+        clonedEpisodes.shift()
+    }
+    console.log(finalEpisodeList)
     // }
 
         // buildTrackList()
@@ -46,8 +46,19 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
         // eslint-disable-next-line
     // }, [fetchedItems])
 
-    // get a chunk of shows to fill the user's specified time for shows
-
+    // combine the finalEpisodeList and finalSongList
+    let finalPlaylistArray = [];
+    while (finalSongList.length > 0 || finalEpisodeList.length > 0) {
+        if (finalEpisodeList.length > 0) {
+            finalPlaylistArray.push(finalEpisodeList[0])
+            finalEpisodeList.shift()
+        }
+        if (finalSongList.length > 0) {
+            finalPlaylistArray.push(finalSongList[0])
+            finalSongList.shift()
+        }
+    }
+    console.log(finalPlaylistArray)
     
     return(
         <>
