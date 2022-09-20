@@ -67,11 +67,19 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
         function altEpisodesFirst() {
             while (finalSongList.length > 0 || finalEpisodeList.length > 0) {
                 console.log('sort while loop running')
-                let fillTime = finalEpisodeList[0].episode.duration_ms
-                let runningFillTime = 0;
+                let fillTime;
+                let runningFillTime;
                 if (finalEpisodeList.length > 0) {
+                    fillTime = finalEpisodeList[0].episode.duration_ms
+                    runningFillTime = 0;
                     finalPlaylistArray.push(finalEpisodeList[0])
                     finalEpisodeList.shift()
+                }
+                if (finalSongList.length > 0 && finalEpisodeList.length < 1) {
+                    while (finalSongList.length > 0) {
+                        finalPlaylistArray.push(finalSongList[0])
+                        finalSongList.shift()
+                    }
                 }
                 while (runningFillTime < fillTime) {
                     console.log('song fill while loop running')

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FormControl, InputLabel, MenuItem, Select, Slider } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select, Slider, Button } from "@mui/material";
 
 export default function Configurator({setUserConfig}) {
     const initialFormState = {songMix: 50, playLength: 3, sortMethod: 'episodesFirst'}
@@ -41,9 +41,9 @@ export default function Configurator({setUserConfig}) {
     ]
 
     return(
-        <div className="configuration">
+        <div className="configuration-wrapper">
             {/* Add form here for user to configure their options */}
-            <div style={{maxWidth: '600px', margin: 'auto'}}>
+            <div className="configuration">
                 <p>Song Mix</p>
                 <Slider
                     name="songMix"
@@ -51,6 +51,7 @@ export default function Configurator({setUserConfig}) {
                     defaultValue={50}
                     onChange={(e) => handleChange(e)}
                     valueLabelDisplay='off'
+                    sx={{ '& .MuiSlider-markLabel': {fontSize: '0.65rem'}}}
                     step={10}
                     track={false}
                     marks={songMixMarks}
@@ -85,7 +86,7 @@ export default function Configurator({setUserConfig}) {
                     </Select>
                 </FormControl>
             </div>
-            <button onClick={() => handleClick()}>Get Playlist</button>
+            <Button variant='contained' sx={{marginTop: '2rem'}} onClick={() => handleClick()}>Get Playlist</Button>
         </div>
     )
 }
