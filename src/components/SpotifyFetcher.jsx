@@ -1,3 +1,5 @@
+// TODO: Fetch more songs so it can make really long playlists
+
 import { useEffect } from "react";
 
 export default function SpotifyFetcher({userConfig, setFetchedItems}) {
