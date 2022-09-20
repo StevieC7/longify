@@ -125,7 +125,7 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
 
     console.log('finalplaylistarray:',finalPlaylistArray)
     async function generateFinal() {
-        await altSongsFirst()
+        await songsFirst()
         setPlaylist(finalPlaylistArray)
     }
     generateFinal()
