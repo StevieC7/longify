@@ -22,17 +22,27 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
     let clonedSongs = [...fetchedItems.songList.items]
     let songsLengthRunning = 0;
     while (songsLengthRunning < songLength * 1000 * 60) {
-        songsLengthRunning += clonedSongs[0].duration_ms
-        finalSongList.push(clonedSongs[0])
-        clonedSongs.shift()
+        if (clonedSongs.length > 0) {
+            songsLengthRunning += clonedSongs[0].duration_ms
+            finalSongList.push(clonedSongs[0])
+            clonedSongs.shift()
+        } else {
+            songsLengthRunning += finalSongList[0].duration_ms
+            finalSongList.push(finalSongList[Math.floor(Math.random()*finalSongList.length)])
+        }
     }
     console.log('finalsonglist:',finalSongList)
     let clonedEpisodes = [...fetchedItems.episodeList.items]
     let episodesRunningLength = 0;
     while (episodesRunningLength < showLength * 1000 * 60) {
-        episodesRunningLength += clonedEpisodes[0].episode.duration_ms
-        finalEpisodeList.push(clonedEpisodes[0])
-        clonedEpisodes.shift()
+        if (clonedEpisodes.length > 0) {
+            episodesRunningLength += clonedEpisodes[0].episode.duration_ms
+            finalEpisodeList.push(clonedEpisodes[0])
+            clonedEpisodes.shift()
+        } else {
+            episodesRunningLength += finalEpisodeList[0].duration_ms
+            finalEpisodeList.push(finalEpisodeList[Math.floor(Math.random()*finalEpisodeList.length)])
+        }
     }
     console.log('finalepisodelist:',finalEpisodeList)
     // }
