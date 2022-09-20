@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import Main from './pages/Main';
 import Callback from './pages/Callback';
@@ -11,7 +12,8 @@ function App() {
       {/* should also include callback for Spotify auth */}
       <Routes>
         <Route path='/' element={<Home />}></Route>
-        <Route path='/callback' element={<Callback/>}></Route>
+        <HashRouter basename='/callback' hashtype='noslash'>
+        </HashRouter>
         <Route path='/make' element={<Main />}></Route>
       </Routes>
     </div>
