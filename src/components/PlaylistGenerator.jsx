@@ -1,15 +1,13 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
-export default function PlaylistGenerator({userConfig, playlist, setPlaylist}) {
-    const baseSpotifyURL = 'https://api.spotify.com/v1'
-    const spotifyToken = localStorage.getItem('accessToken')
-    const getSongsInit = {
-        headers: {
-            'Authorization': `Bearer ${spotifyToken}`,
-            'Content-Type': 'application/json'
-        }
+export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist}) {
+    console.log(fetchedItems)
+    if (fetchedItems.songList.length === 0) {
+        return(
+            <p>Loading</p>
+        )
     }
-    console.log(`base spotify url: ${baseSpotifyURL}, spotifyToken: ${spotifyToken}`)
+
     // split the time allocation and set it for songs and shows respectively
     const songLength = Math.ceil(0.01 * userConfig.songMix * userConfig.playLength * 60)
     const showLength = (userConfig.playLength * 60) - songLength
@@ -18,63 +16,41 @@ export default function PlaylistGenerator({userConfig, playlist, setPlaylist}) {
     console.log("Total song playtime in minutes:",songLength)
     console.log("Total show playtime in minutes:", showLength)
     
-    // get a chunk of songs to fill the user's specified time for songs (this is using the bangers only approach for now by grabbing user's top 50 songs, but you can do more if you use tracks endpoint for recommendations based on seed track)
-
-    let songList;
-    let episodeList;
-    const getFromSpotify = () => {
-        Promise.all([
-            fetch(`${baseSpotifyURL}/me/top/tracks?limit=50`, getSongsInit), 
-            fetch(`${baseSpotifyURL}/me/episodes?limit=50`, getSongsInit)
-        ])
-        .then((res) => Promise.all(res.map((val) => val.json())))
-        .then((arr) => {
-            songList = arr[0]
-            episodeList = arr[1]
+    let finalSongList = [];
+    let finalEpisodeList = [];
+    
+    // inside each track, target key is duration_ms
+    // useEffect(() => {
+    // const buildTrackList = () => {
+        let clonedSongs = [...fetchedItems.songList.items]
+        console.log('clonedSongs:',clonedSongs)
+        let songsLengthRunning = 0;
+        while (songsLengthRunning < songLength * 1000 * 60) {
+            songsLengthRunning += clonedSongs[0].duration_ms
+            finalSongList.push(clonedSongs[0])
+            clonedSongs.shift()
         }
-        )
-    }
-    // setTimeout(() => {
-    //     console.log(songList)
-    //     console.log(episodeList)
-    // }, 5000) 
-    
-    // const getSongs = () => {
-    //     fetch(`${baseSpotifyURL}/me/top/tracks?limit=50`, getSongsInit)
-    //     .then((res) => res.json())
-    //     // .then((json) => console.log(json.items))
-    //     .then((json) => {gotSongs = json.items})
-    //     // buildSongList()
-    //     // .then((json) => setPlaylist(json.items))
-    //     .catch((err) => console.log(err))
-    // }
-    
-    // // inside each track, target key is duration_ms
-    // const buildSongList = async () => {
-    //     await getSongs()
-    //     console.log(gotSongs)
-    //     let songsLengthRunning = 0;
-    //     while (songsLengthRunning < songLength * 1000 * 60) {
-    //         songsLengthRunning += gotSongs[0].duration_ms
-    //         songList.push(gotSongs[0])
-    //         gotSongs.shift()
-    //     }
-    //     console.log(songList)
+        console.log(finalSongList)
+        let clonedEpisodes = [...fetchedItems.episodeList.items]
+        let episodesRunningLength = 0;
+        while (episodesRunningLength < showLength * 1000 * 60) {
+            episodesRunningLength += clonedEpisodes[0].episode.duration_ms
+            finalEpisodeList.push(clonedEpisodes[0])
+            clonedEpisodes.shift()
+        }
+        console.log(finalEpisodeList)
     // }
 
-    useEffect(() => {
-        getFromSpotify()
-        // buildSongList()
-        // console.log("Gotsongs:",gotSongs)
+        // buildTrackList()
+        // getFromSpotify()
         // eslint-disable-next-line
-    }, [userConfig])
+    // }, [fetchedItems])
 
     // get a chunk of shows to fill the user's specified time for shows
 
     
     return(
         <>
-            {playlist.length > 0 ? <p>Playlist Loading...</p> : <p>Playlist goes here</p>}
         </>
     )
 }
