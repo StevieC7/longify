@@ -5,8 +5,6 @@ export default function Configurator({setUserConfig}) {
     const initialFormState = {songMix: 50, playLength: 3, sortMethod: 'episodesFirst'}
     const [formState, setFormState] = useState(initialFormState)
 
-    console.log("Configurator has token:",localStorage.getItem('accessToken'))
-
     const handleClick = () => {
         setUserConfig(formState)
         setFormState(initialFormState)
@@ -14,7 +12,6 @@ export default function Configurator({setUserConfig}) {
 
     const handleChange = async (e) => {
         await setFormState({...formState, [e.target.name]: e.target.value})
-        console.log(formState)
     }
 
     const songMixMarks = [

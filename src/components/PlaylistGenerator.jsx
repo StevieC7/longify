@@ -2,7 +2,6 @@
 // import { useEffect } from "react";
 
 export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist}) {
-    console.log('fetcheditems:',fetchedItems)
     if (fetchedItems.songList.length === 0) {
         return(
             <p>Loading</p>
@@ -30,7 +29,6 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
             finalSongList.push(finalSongList[Math.floor(Math.random()*finalSongList.length)])
         }
     }
-    // console.log('finalsonglist:',finalSongList)
     let clonedEpisodes = [...fetchedItems.episodeList.items]
     while (episodesRunningLength < showLength * 1000 * 60) {
         if (clonedEpisodes.length > 0) {
@@ -42,7 +40,6 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
             finalEpisodeList.push(finalEpisodeList[Math.floor(Math.random()*finalEpisodeList.length)])
         }
     }
-    // console.log('finalepisodelist:',finalEpisodeList)
     // }
 
         // buildTrackList()
@@ -66,7 +63,6 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
         
         function altEpisodesFirst() {
             while (finalSongList.length > 0 || finalEpisodeList.length > 0) {
-                console.log('sort while loop running')
                 let fillTime;
                 let runningFillTime;
                 if (finalEpisodeList.length > 0) {
@@ -82,12 +78,10 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
                     }
                 }
                 while (runningFillTime < fillTime) {
-                    console.log('song fill while loop running')
                     if (finalSongList.length > 0) {
                         runningFillTime += finalSongList[0].duration_ms
                         finalPlaylistArray.push(finalSongList[0])
                         finalSongList.shift()
-                        console.log('running fill time:', runningFillTime)
                     } else {
                         runningFillTime = fillTime
                     }
@@ -106,7 +100,6 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
         
         function altSongsFirst() {
             while (finalSongList.length > 0 || finalEpisodeList.length > 0) {
-                console.log('sort while loop running')
                 let fillTime;
                 let runningFillTime;
                 if (finalEpisodeList.length > 0) {
@@ -120,12 +113,10 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
                     }
                 }
                 while (runningFillTime < fillTime) {
-                    console.log('song fill while loop running')
                     if (finalSongList.length > 0) {
                         runningFillTime += finalSongList[0].duration_ms
                         finalPlaylistArray.push(finalSongList[0])
                         finalSongList.shift()
-                        console.log('running fill time:', runningFillTime)
                     } else {
                         runningFillTime = fillTime
                     }
@@ -152,7 +143,6 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
             }
         }
         
-        console.log('finalplaylistarray:',finalPlaylistArray)
         async function generateFinal() {
             await sortSongs(userConfig.sortMethod)
             setPlaylist(finalPlaylistArray)

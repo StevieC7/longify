@@ -10,7 +10,6 @@ export default function Home(props) {
     // set state in local storage at home page render
     let spotifyState = encodeURIComponent(uuidv4());
     useEffect(() => {
-        console.log('use effect ran')
         localStorage.setItem("spotifyState", spotifyState);
     }, [spotifyState])
     

@@ -9,7 +9,6 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
             }
             return `spotify:episode:${val.episode.id}`
         })}
-        console.log(spotifyURIs)
     const getSongMixInfo = (num) => {
         if (num === 50) {
             return 'even mix'
@@ -51,7 +50,6 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
             .then((res) => res.json())
             .catch((e) => console.log(e))
             .then((json) => {
-                console.log('response from playlist create:', json)
                 fetch(`https://api.spotify.com/v1/playlists/${json.id}/tracks`, {
                     method: 'post',
                     headers: {
