@@ -25,6 +25,16 @@
   align-items: center;
 }
 
+.stickytop {
+  position: sticky;
+  top: 0px;
+  background-color: #aaaaee;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (max-width: 420px) {
   :root {
     font-size: 12px;

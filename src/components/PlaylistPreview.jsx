@@ -18,13 +18,11 @@ export default function PlaylistPreview({userConfig, setUserConfig}) {
         <SpotifyFetcher userConfig={userConfig} setFetchedItems={setFetchedItems}/>
         {playlist.length < 1 ? <PlaylistGenerator userConfig={userConfig} fetchedItems={fetchedItems} setPlaylist={setPlaylist}/> : <></>}
         <div className="stickytop">
-            <Button variant='outlined' onClick={() => reconfig()}>Reconfigure</Button>
+            <Button variant='outlined' sx={{margin: '2rem', backgroundColor: 'white', '&:hover': {backgroundColor: '#efefef'}}} onClick={() => reconfig()}>Reconfigure</Button>
             <PlaylistActions playlist={playlist} setPlaylist={setPlaylist} userConfig={userConfig}/>
         </div>
         <div className="playlist">
-            {playlist.map((val) => {return(
-                <p>{val.name ? val.name : val.episode.name}</p>
-            )})}
+            {playlist.map((val, key) => {return(val.name ? <p key={key}>{val.name}</p> : <p key={key}>{val.episode.name}</p>)})}
         </div>
         </>
     )

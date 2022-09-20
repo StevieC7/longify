@@ -76,16 +76,10 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
     return(
         <>
             {
-                addSuccess === null ? 
-                <Button variant="contained" onClick={() => handleAdd()}>Add to Library</Button>
+                addSuccess === null && addSuccess !== false ? 
+                <Button variant="contained" sx={{margin: '2rem'}} onClick={() => handleAdd()}>Add to Library</Button>
                 :
-                <Button variant="contained" disabled></Button>
-            }
-            {
-                addSuccess === true && addSuccess !== null ?
-                <p>{'playlist added :)'}</p>
-                :
-                <></>
+                <Button variant="contained" sx={{margin: '2rem'}} disabled>Added to Library</Button>
             }
         </>
     )
