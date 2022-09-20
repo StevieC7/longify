@@ -65,8 +65,6 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
         }
         
         function altEpisodesFirst() {
-            console.log('INSORT final song list:', finalSongList)
-            console.log('INSORT final episode list:', finalEpisodeList)
             while (finalSongList.length > 0 || finalEpisodeList.length > 0) {
                 console.log('sort while loop running')
                 let fillTime = finalEpisodeList[0].episode.duration_ms
@@ -99,8 +97,6 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
         }
         
         function altSongsFirst() {
-            console.log('INSORT final song list:', finalSongList)
-            console.log('INSORT final episode list:', finalEpisodeList)
             while (finalSongList.length > 0 || finalEpisodeList.length > 0) {
                 console.log('sort while loop running')
                 let fillTime;
