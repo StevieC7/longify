@@ -1,6 +1,3 @@
-// TODO: adjust algo to space out songs and episodes by playtime, not just song > playlist > song > playlist
-// import { useEffect } from "react";
-
 export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist}) {
     if (fetchedItems.songList.length === 0) {
         return(
