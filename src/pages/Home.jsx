@@ -5,7 +5,7 @@ export default function Home(props) {
     // Auth API call function that builds query and pings Spotify auth API
     // refactor later with backend to keep this a real secret, since React will just embed env variables at build
     const getToken= async () => {
-        const token = await fetch('/.netflify/functions/keys').then((res) => res.json().clientID)
+        const token = await fetch('/.netflify/functions/keys').then((res) => res.json()).then((json) => json)
         // const clientID = '83142baf3b354b7a901a4f46e0f371d1'
         return token
     }
