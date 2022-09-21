@@ -62,6 +62,13 @@ header {
   justify-content: center;
 }
 
+.playlist-summary {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  background-color: rgba(0, 0, 0, 0.1)
+}
+
 .playlist-item {
   display: flex;
   justify-content: space-between;
