@@ -9,13 +9,13 @@ export default function Home(props) {
         // const clientID = '83142baf3b354b7a901a4f46e0f371d1'
         return clientID
     }
-    getToken()
     const redirectURL = encodeURIComponent('https://splendid-dieffenbachia-118c6c.netlify.app/callback')
     // const redirectURL = encodeURIComponent('http://localhost:3000/callback')
     let scope = encodeURIComponent('user-read-private user-read-email playlist-read-private playlist-modify-public user-library-read user-top-read user-read-recently-played')
     // set state in local storage at home page render
     let spotifyState = encodeURIComponent(uuidv4());
     useEffect(() => {
+        getToken()
         localStorage.setItem("spotifyState", spotifyState);
     }, [spotifyState])
     
