@@ -77,7 +77,7 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
         <>
             {
                 addSuccess === null && addSuccess !== false ? 
-                <Button variant="contained" sx={{margin: '2rem'}} onClick={() => handleAdd()}>Add to Library</Button>
+                <Button variant="contained" sx={{margin: '2rem', backgroundColor: '#1DB954', '&:hover': {backgroundColor: '#1DB954'}}} onClick={() => handleAdd()}>Add to Library</Button>
                 :
                 <Button variant="contained" sx={{margin: '2rem'}} disabled>Added to Library</Button>
             }

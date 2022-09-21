@@ -48,7 +48,7 @@ export default function Configurator({setUserConfig}) {
                     defaultValue={50}
                     onChange={(e) => handleChange(e)}
                     valueLabelDisplay='off'
-                    sx={{ '& .MuiSlider-markLabel': {fontSize: '0.65rem'}}}
+                    sx={{ color: '#B07BAC', '& .MuiSlider-markLabel': {fontSize: '0.65rem'}}}
                     step={10}
                     track={false}
                     marks={songMixMarks}
@@ -62,18 +62,20 @@ export default function Configurator({setUserConfig}) {
                     defaultValue={3}
                     onChange={(e) => handleChange(e)}
                     valueLabelDisplay='on'
+                    sx={{color: '#B07BAC'}}
                     step={1}
                     min={3}
                     max={12}
                 />
-                <FormControl variant="filled">
-                    <InputLabel id="sort-method-label">Sort Method</InputLabel>
+                <FormControl variant="filled" sx={{'& .MuiFormLabel-root': {color: '#B07BAC'}, '& .MuiInputLabel-root': {color: '#B07BAC'}}}>
+                    <InputLabel id="sort-method-label" sx={{'& .MuiInputLabel-root': {color: '#B07BAC'}, '& .MuiFormLabel-root': {color: '#B07BAC'}}}>Sort</InputLabel>
                     <Select
                         labelId="sort-method-label"
                         id="sort-method"
                         name="sortMethod"
                         value={formState.sortMethod}
-                        label='Sort Method'
+                        label='Sort'
+                        // sx={{'& .MuiFormLabel-root': {color: '#B07BAC'}, '& .MuiInputLabel-root': {color: '#B07BAC'}}}
                         onChange={(e) => handleChange(e)}
                         >
                         <MenuItem value={'songsFirst'}>Songs first</MenuItem>
@@ -83,7 +85,7 @@ export default function Configurator({setUserConfig}) {
                     </Select>
                 </FormControl>
             </div>
-            <Button variant='contained' sx={{marginTop: '2rem'}} onClick={() => handleClick()}>Get Playlist</Button>
+            <Button variant='contained' sx={{marginTop: '2rem', backgroundColor: '#1DB954', '&:hover': {backgroundColor: '#1DB954'}}} onClick={() => handleClick()}>Get Playlist</Button>
         </div>
     )
 }
