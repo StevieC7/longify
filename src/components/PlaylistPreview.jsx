@@ -3,6 +3,7 @@ import PlaylistGenerator from "./PlaylistGenerator";
 import SpotifyFetcher from "./SpotifyFetcher";
 import { Button } from "@mui/material";
 import PlaylistActions from "./PlaylistActions";
+import PlaylistItems from "./PlaylistItems";
 
 export default function PlaylistPreview({userConfig, setUserConfig}) {
     const [fetchedItems, setFetchedItems] = useState({songList: [], episodeList: []})
@@ -21,9 +22,7 @@ export default function PlaylistPreview({userConfig, setUserConfig}) {
             <Button variant='outlined' sx={{margin: '2rem', backgroundColor: '#B07BAC', color: '#DFE0DC', borderColor: '#DFE0DC', '&:hover': {backgroundColor: '#B07BAC', color: 'white', borderColor: 'white'}}} onClick={() => reconfig()}>Reconfigure</Button>
             <PlaylistActions playlist={playlist} setPlaylist={setPlaylist} userConfig={userConfig}/>
         </div>
-        <div className="playlist">
-            {playlist.map((val, key) => {return(val.name ? <p key={key}>{val.name}</p> : <p key={key}>{val.episode.name}</p>)})}
-        </div>
+        <PlaylistItems playlist={playlist} />
         </>
     )
 }
