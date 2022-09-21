@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { Button } from '@mui/material';
+import { useState } from 'react';
 import StartButton from '../components/StartButton';
 export default function Home(props) {
     const [auth, setAuth] = useState({})
@@ -34,7 +32,7 @@ export default function Home(props) {
     <>
         <h1>Longify</h1>
         <p>Generate long playlists of songs and podcasts for Spotify.</p>
-        <StartButton setAuth={setAuth}/>
+        <StartButton setAuth={setAuth} auth={auth}/>
     </>
     )
 }
