@@ -17,6 +17,12 @@ export default function StartButton({auth, setAuth}) {
     }, [])
 
     return(
-        <Button variant="contained" href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${auth.clientID}&scope=${auth.scope}&redirect_uri=${auth.redirectURL}&state=${auth.spotifyState}&show_dialog=true`}>Build Playlist</Button>
+        <Button 
+            variant="contained" 
+            sx={{margin: '2rem', backgroundColor: '#1DB954', '&:hover': {backgroundColor: '#1DB954'}}} 
+            href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${auth.clientID}&scope=${auth.scope}&redirect_uri=${auth.redirectURL}&state=${auth.spotifyState}&show_dialog=true`}
+        >
+            Build Playlist
+        </Button>
     )
 }
