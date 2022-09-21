@@ -66,7 +66,7 @@ export default function Configurator({setUserConfig}) {
                     min={3}
                     max={12}
                 />
-                <FormControl variant="filled" sx={{'& .MuiFormLabel-root': {color: '#B07BAC'}, '& .MuiInputLabel-root': {color: '#B07BAC'}}}>
+                <FormControl variant="filled" sx={{width: '100%', '& .MuiFormLabel-root': {color: '#B07BAC'}, '& .MuiInputLabel-root': {color: '#B07BAC'}}}>
                     <InputLabel id="sort-method-label" sx={{'& .MuiInputLabel-root': {color: '#B07BAC'}, '& .MuiFormLabel-root': {color: '#B07BAC'}}}>Sort</InputLabel>
                     <Select
                         labelId="sort-method-label"
@@ -83,7 +83,7 @@ export default function Configurator({setUserConfig}) {
                     </Select>
                 </FormControl>
             </div>
-            <Button variant='contained' sx={{marginTop: '2rem', backgroundColor: '#1DB954', '&:hover': {backgroundColor: '#1DB954'}}} onClick={() => handleClick()}>Get Playlist</Button>
+            <Button variant='contained' sx={{marginTop: '2rem', marginBottom: '2rem', backgroundColor: '#1DB954', '&:hover': {backgroundColor: '#1DB954'}}} onClick={() => handleClick()}>Get Playlist</Button>
         </div>
     )
 }
