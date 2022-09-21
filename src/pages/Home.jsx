@@ -8,7 +8,9 @@ export default function Home(props) {
         let token;
         const response = await fetch('/.netflify/functions/keys').then((res) => console.log(res.json()))
         // const clientID = '83142baf3b354b7a901a4f46e0f371d1'
+        console.log('response:',response)
         token = await response
+        console.log('token:',token)
         return token
     }
     const clientID = getToken()
