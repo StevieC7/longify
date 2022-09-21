@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 export default function Home(props) {
     // Auth API call function that builds query and pings Spotify auth API
     // refactor later with backend to keep this a real secret, since React will just embed env variables at build
-    const getToken= async () => {
+    const getToken = async () => {
         let token;
         const response = await fetch('/.netflify/functions/keys')
         console.log(response)
