@@ -1,9 +1,9 @@
 exports.handler = async function(event, context) {
     return {
-        headers: {
+        'statusCode': 200,
+        'headers': {
             'Content-Type': 'application/json'
         },
-        statusCode: 200,
-        body: JSON.stringify({clientID: process.env.clientID})
+        'body': JSON.stringify({'clientID': process.env.clientID})
     }
 }
