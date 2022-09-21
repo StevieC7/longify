@@ -5,7 +5,11 @@ export default function Home(props) {
     // Auth API call function that builds query and pings Spotify auth API
     // refactor later with backend to keep this a real secret, since React will just embed env variables at build
     let clientID;
-    fetch('/.netlify/functions/keys').then((res) => res.json()).then((data) => console.log(data))
+    fetch('/.netlify/functions/keys').then((res) => res.json()).then((data) => {
+        console.log(data)
+        clientID = data.clientID
+        console.log(clientID)
+    })
 
     const redirectURL = encodeURIComponent('https://splendid-dieffenbachia-118c6c.netlify.app/callback')
     // const redirectURL = encodeURIComponent('http://localhost:3000/callback')

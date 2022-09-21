@@ -5,6 +5,6 @@ exports.handler = async function(event, context) {
             'Content-Type': 'application/json'
         },
         // 'body': JSON.stringify({clientID: process.env.clientID})
-        body: JSON.stringify({'clientID': `${process.env.clientID}`})
+        body: JSON.stringify({'clientID': `${process.env.CLIENT_ID}`})
     }
 }
