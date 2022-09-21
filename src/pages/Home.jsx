@@ -6,11 +6,9 @@ export default function Home(props) {
     // refactor later with backend to keep this a real secret, since React will just embed env variables at build
     const getToken = async () => {
         let token;
-        const response = await fetch('/.netflify/functions/keys')
-        console.log(response.body.json())
-        token = await response.body.json()
+        const response = await fetch('/.netflify/functions/keys').then((res) => console.log(res.json()))
         // const clientID = '83142baf3b354b7a901a4f46e0f371d1'
-        console.log(token)
+        // console.log(token)
         return token
     }
     const clientID = getToken()
