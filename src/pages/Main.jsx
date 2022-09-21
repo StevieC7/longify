@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Configurator from "../components/Configurator";
+import Header from "../components/Header";
 import PlaylistPreview from "../components/PlaylistPreview";
 
 export default function Main(props) {
@@ -7,18 +8,19 @@ export default function Main(props) {
     
     return(
     <>
-        {
-            userConfig.songMix !== undefined ? 
-            <PlaylistPreview userConfig={userConfig} setUserConfig={setUserConfig}/> 
-            : 
-            <></>
-        }
-        {
-            userConfig.songMix === undefined ? 
-            <Configurator setUserConfig={setUserConfig}/> 
-            : 
-            <></>
-        }
+    <Header />
+    {
+        userConfig.songMix !== undefined ? 
+        <PlaylistPreview userConfig={userConfig} setUserConfig={setUserConfig}/> 
+        : 
+        <></>
+    }
+    {
+        userConfig.songMix === undefined ? 
+        <Configurator setUserConfig={setUserConfig}/> 
+        : 
+        <></>
+    }
     </>
     )
 }
