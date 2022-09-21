@@ -14,10 +14,12 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
     
     let finalSongList = [];
     let finalEpisodeList = [];
+    
     // have to clone songs because it's a state item
     let clonedSongs = [...fetchedItems.songList.items]
     let songsLengthRunning = 0;
     let episodesRunningLength = 0;
+    
     // use while loops to fill the user's desired length for each type of media
     while (songsLengthRunning < songLength * 1000 * 60) {
         if (clonedSongs.length > 0) {
@@ -40,113 +42,104 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
             finalEpisodeList.push(finalEpisodeList[Math.floor(Math.random()*finalEpisodeList.length)])
         }
     }
-    // }
 
-        // buildTrackList()
-        // getFromSpotify()
-        // eslint-disable-next-line
-    // }, [fetchedItems])
-
-    // combine the finalEpisodeList and finalSongList
     let finalPlaylistArray = [];
 
-    // insert a function that takes in userConfig and selects a sort function from below
-
-        function episodesFirst() {
-            for (let i = 0; i < finalEpisodeList.length; i++) {
-                finalPlaylistArray.push(finalEpisodeList[i])
-            }
-            for (let i = 0; i < finalSongList.length; i++) {
-                finalPlaylistArray.push(finalSongList[i])
-            }
+    function episodesFirst() {
+        for (let i = 0; i < finalEpisodeList.length; i++) {
+            finalPlaylistArray.push(finalEpisodeList[i])
         }
-        
-        function altEpisodesFirst() {
-            while (finalSongList.length > 0 || finalEpisodeList.length > 0) {
-                let fillTime;
-                let runningFillTime;
-                if (finalEpisodeList.length > 0) {
-                    fillTime = finalEpisodeList[0].episode.duration_ms
-                    runningFillTime = 0;
-                    finalPlaylistArray.push(finalEpisodeList[0])
-                    finalEpisodeList.shift()
-                }
-                if (finalSongList.length > 0 && finalEpisodeList.length < 1) {
-                    while (finalSongList.length > 0) {
-                        finalPlaylistArray.push(finalSongList[0])
-                        finalSongList.shift()
-                    }
-                }
-                while (runningFillTime < fillTime) {
-                    if (finalSongList.length > 0) {
-                        runningFillTime += finalSongList[0].duration_ms
-                        finalPlaylistArray.push(finalSongList[0])
-                        finalSongList.shift()
-                    } else {
-                        runningFillTime = fillTime
-                    }
-                }
-            }
+        for (let i = 0; i < finalSongList.length; i++) {
+            finalPlaylistArray.push(finalSongList[i])
         }
-        
-        function songsFirst() {
-            for (let i = 0; i < finalSongList.length; i++) {
-                finalPlaylistArray.push(finalSongList[i])
-            }
-            for (let i = 0; i < finalEpisodeList.length; i++) {
-                finalPlaylistArray.push(finalEpisodeList[i])
-            }
-        }
-        
-        function altSongsFirst() {
-            while (finalSongList.length > 0 || finalEpisodeList.length > 0) {
-                let fillTime;
-                let runningFillTime;
-                if (finalEpisodeList.length > 0) {
-                    fillTime = finalEpisodeList[0].episode.duration_ms
-                    runningFillTime = 0;
-                }
-                if (finalSongList.length > 0 && finalEpisodeList.length < 1) {
-                    while (finalSongList.length > 0) {
-                        finalPlaylistArray.push(finalSongList[0])
-                        finalSongList.shift()
-                    }
-                }
-                while (runningFillTime < fillTime) {
-                    if (finalSongList.length > 0) {
-                        runningFillTime += finalSongList[0].duration_ms
-                        finalPlaylistArray.push(finalSongList[0])
-                        finalSongList.shift()
-                    } else {
-                        runningFillTime = fillTime
-                    }
-                }
-                if (finalEpisodeList.length > 0) {
-                    finalPlaylistArray.push(finalEpisodeList[0])
-                    finalEpisodeList.shift()
-                }
-            }
-        }
-
-        function sortSongs(sortMethod) {
-            if (sortMethod === 'episodesFirst') {
-                return episodesFirst()
-            }
-            if (sortMethod === 'songsFirst') {
-                return songsFirst()
-            }
-            if (sortMethod === 'altEpisodesFirst') {
-                return altEpisodesFirst()
-            }
-            if (sortMethod === 'altSongsFirst') {
-                return altSongsFirst()
-            }
-        }
-        
-        async function generateFinal() {
-            await sortSongs(userConfig.sortMethod)
-            setPlaylist(finalPlaylistArray)
-        }
-        generateFinal()
-        return(<></>)
     }
+    
+    function altEpisodesFirst() {
+        while (finalSongList.length > 0 || finalEpisodeList.length > 0) {
+            let fillTime;
+            let runningFillTime;
+            if (finalEpisodeList.length > 0) {
+                fillTime = finalEpisodeList[0].episode.duration_ms
+                runningFillTime = 0;
+                finalPlaylistArray.push(finalEpisodeList[0])
+                finalEpisodeList.shift()
+            }
+            if (finalSongList.length > 0 && finalEpisodeList.length < 1) {
+                while (finalSongList.length > 0) {
+                    finalPlaylistArray.push(finalSongList[0])
+                    finalSongList.shift()
+                }
+            }
+            while (runningFillTime < fillTime) {
+                if (finalSongList.length > 0) {
+                    runningFillTime += finalSongList[0].duration_ms
+                    finalPlaylistArray.push(finalSongList[0])
+                    finalSongList.shift()
+                } else {
+                    runningFillTime = fillTime
+                }
+            }
+        }
+    }
+    
+    function songsFirst() {
+        for (let i = 0; i < finalSongList.length; i++) {
+            finalPlaylistArray.push(finalSongList[i])
+        }
+        for (let i = 0; i < finalEpisodeList.length; i++) {
+            finalPlaylistArray.push(finalEpisodeList[i])
+        }
+    }
+    
+    function altSongsFirst() {
+        while (finalSongList.length > 0 || finalEpisodeList.length > 0) {
+            let fillTime;
+            let runningFillTime;
+            if (finalEpisodeList.length > 0) {
+                fillTime = finalEpisodeList[0].episode.duration_ms
+                runningFillTime = 0;
+            }
+            if (finalSongList.length > 0 && finalEpisodeList.length < 1) {
+                while (finalSongList.length > 0) {
+                    finalPlaylistArray.push(finalSongList[0])
+                    finalSongList.shift()
+                }
+            }
+            while (runningFillTime < fillTime) {
+                if (finalSongList.length > 0) {
+                    runningFillTime += finalSongList[0].duration_ms
+                    finalPlaylistArray.push(finalSongList[0])
+                    finalSongList.shift()
+                } else {
+                    runningFillTime = fillTime
+                }
+            }
+            if (finalEpisodeList.length > 0) {
+                finalPlaylistArray.push(finalEpisodeList[0])
+                finalEpisodeList.shift()
+            }
+        }
+    }
+
+    function sortSongs(sortMethod) {
+        if (sortMethod === 'episodesFirst') {
+            return episodesFirst()
+        }
+        if (sortMethod === 'songsFirst') {
+            return songsFirst()
+        }
+        if (sortMethod === 'altEpisodesFirst') {
+            return altEpisodesFirst()
+        }
+        if (sortMethod === 'altSongsFirst') {
+            return altSongsFirst()
+        }
+    }
+    
+    async function generateFinal() {
+        await sortSongs(userConfig.sortMethod)
+        setPlaylist(finalPlaylistArray)
+    }
+    generateFinal()
+    return(<></>)
+}

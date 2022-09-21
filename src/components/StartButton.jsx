@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from 'uuid';
 export default function StartButton({auth, setAuth}) {
     const redirectURL = encodeURIComponent('https://splendid-dieffenbachia-118c6c.netlify.app/callback')
     const scope = encodeURIComponent('user-read-private user-read-email playlist-read-private playlist-modify-public user-library-read user-top-read user-read-recently-played')
-    // set state in local storage at home page render
     const spotifyState = encodeURIComponent(uuidv4());
     
     useEffect(() => {

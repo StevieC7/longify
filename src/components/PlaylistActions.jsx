@@ -70,8 +70,6 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                 })
             })
         })
-        // .then((res) => res.json())
-        // chain another request to populate the playlist
     }
     return(
         <>

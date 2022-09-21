@@ -12,9 +12,6 @@ export default function SpotifyFetcher({userConfig, setFetchedItems}) {
             'Content-Type': 'application/json'
         }
     }
-    // split the time allocation and set it for songs and shows respectively
-    // const songLength = Math.ceil(0.01 * userConfig.songMix * userConfig.playLength * 60)
-    // const showLength = (userConfig.playLength * 60) - songLength
     
     // get a chunk of songs to fill the user's specified time for songs (this is using the bangers only approach for now by grabbing user's top 50 songs, but you can do more if you use tracks endpoint for recommendations based on seed track)
     const getFromSpotify = () => {

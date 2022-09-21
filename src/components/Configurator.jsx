@@ -39,7 +39,6 @@ export default function Configurator({setUserConfig}) {
 
     return(
         <div className="configuration-wrapper">
-            {/* Add form here for user to configure their options */}
             <div className="configuration">
                 <p>Song Mix</p>
                 <Slider
@@ -75,7 +74,6 @@ export default function Configurator({setUserConfig}) {
                         name="sortMethod"
                         value={formState.sortMethod}
                         label='Sort'
-                        // sx={{'& .MuiFormLabel-root': {color: '#B07BAC'}, '& .MuiInputLabel-root': {color: '#B07BAC'}}}
                         onChange={(e) => handleChange(e)}
                         >
                         <MenuItem value={'songsFirst'}>Songs first</MenuItem>
