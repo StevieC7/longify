@@ -105,6 +105,20 @@ header {
   background-color: rgba(0, 0, 0, 0.1)
 }
 
+.playlist-meta {
+  display: flex;
+  align-items: center;
+}
+
+.playlist-cover {
+  max-width: 100px;
+}
+
+.playlist-name {
+  color: white;
+  margin: 1rem;
+}
+
 .playlist-item {
   display: flex;
   justify-content: space-between;

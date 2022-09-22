@@ -2,7 +2,8 @@ import { useState } from "react"
 import { Button } from "@mui/material"
 export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
     const [addSuccess, setAddSuccess] = useState(null)
-    const [playlistDetails, setPlaylistDetails] = useState(null)
+    const [playlistDetails, setPlaylistDetails] = useState({})
+    let playlistID;
     let spotifyURIs = {
         uris: playlist.map((val) => {
             if(val.id) {
@@ -50,6 +51,7 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
             })
             .then((res) => res.json())
             .then((json) => {
+                playlistID = json.id
                 fetch(`https://api.spotify.com/v1/playlists/${json.id}/tracks`, {
                     method: 'post',
                     headers: {
@@ -61,8 +63,16 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                 .then((res) => res.json())
                 .then((json) => {
                     if (json.snapshot_id) {
+                        console.log(playlistID)
                         setAddSuccess(true)
-                        setPlaylistDetails({cover: `${json.images[0].url}`})
+                        fetch(`https://api.spotify.com/v1/playlists/${playlistID}`, {
+                            headers: {
+                                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then((res) => res.json())
+                        .then((json) => setPlaylistDetails({cover: `${json.images[0].url}`, playLink: `${json.external_urls.spotify}`, name: `${json.name}`}))
                     }
                 })
                 .catch(() => {
@@ -78,9 +88,18 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                 <Button variant="contained" sx={{margin: '1rem', backgroundColor: '#1DB954', '&:hover': {backgroundColor: '#1DB954'}}} onClick={() => handleAdd()}>Add to Library</Button>
                 :
                 <>
-                <Button variant="contained" sx={{margin: '1rem', backgroundColor: '#1DB954'}} disabled>Added to Library</Button>
                 <div className="playlist-meta">
-                    {playlistDetails ? <img src={playlistDetails.cover} alt='playlist cover'/> : <p>loading</p>}
+                    {
+                        playlistDetails ? 
+                            <>
+                            <a href={playlistDetails.playLink}>
+                                <img src={playlistDetails.cover} alt='playlist cover' className="playlist-cover" />
+                            </a>
+                            <p className="playlist-name">{playlistDetails.name}</p>
+                            </> 
+                        : 
+                            <Button variant="contained" sx={{margin: '1rem', backgroundColor: '#1DB954'}} disabled>Added to Library</Button>
+                    }
                 </div>
                 </>
             }
