@@ -17,6 +17,7 @@ export default function PlaylistItems({playlist}) {
                         <div className="playlist-item-left">
                             <p className="song-tag">Song</p>
                             <p>{val.name}</p>
+                            <p>&nbsp;| {val.artists[0].name}</p>
                         </div>
                             <p>{formatDuration(val.duration_ms)}</p>
                     </div>

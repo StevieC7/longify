@@ -125,7 +125,10 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                             <a href={playlistDetails.playLink}>
                                 <img src={playlistDetails.cover} alt='playlist cover' className="playlist-cover" />
                             </a>
-                            <p className="playlist-name">{playlistDetails.name}</p>
+                            <div>
+                                <p className="playlist-name">{playlistDetails.name}</p>
+                                <Button variant="contained" sx={{margin: '0.5rem 1rem', backgroundColor: '#1DB954', '&:hover': {backgroundColor: '#19B550'}}} href={playlistDetails.playLink}>Open in Spotify</Button>
+                            </div>
                             </> 
                         : 
                             <Button variant="contained" sx={{margin: '1rem', backgroundColor: '#1DB954'}} disabled>Added to Library</Button>
