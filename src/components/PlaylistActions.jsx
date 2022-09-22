@@ -63,7 +63,6 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                 .then((res) => res.json())
                 .then((json) => {
                     if (json.snapshot_id) {
-                        console.log(playlistID)
                         setAddSuccess(true)
                         fetch(`https://api.spotify.com/v1/playlists/${playlistID}`, {
                             headers: {
