@@ -14,7 +14,7 @@ export default function SpotifyFetcher({userConfig, setFetchedItems}) {
         }
     }
     
-    // get a chunk of songs to fill the user's specified time for songs (this is using the bangers only approach for now by grabbing user's top 50 songs, but you can do more if you use tracks endpoint for recommendations based on seed track)
+    // get a chunk of songs and episodes to fill the user's specified time for songs (this is using the bangers only approach for now by grabbing user's top 50 songs, but you can do more if you use tracks endpoint for recommendations based on seed track)
     const getFromSpotify = () => {
         Promise.all([
             fetch(`${baseSpotifyURL}/me/top/tracks?limit=50`, getSongsInit).catch((err) => err), 
@@ -35,10 +35,6 @@ export default function SpotifyFetcher({userConfig, setFetchedItems}) {
         // eslint-disable-next-line
     }, [userConfig])
 
-
-    // get a chunk of shows to fill the user's specified time for shows
-
-    
     return(
         <>
         </>

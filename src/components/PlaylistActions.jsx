@@ -11,7 +11,7 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
             }
             return `spotify:episode:${val.episode.id}`
         })}
-    // add function to split the list up until all URI lists would be shorter than 100 items (limit set by Spotify API)
+    // function to split the list up until all URI lists would be shorter than 100 items (limit set by Spotify API)
     const arrSpotifyURIs = splitURIs()
     function splitURIs() {
         if (spotifyURIs.uris.length > 0) {
@@ -73,6 +73,7 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
             .then((res) => res.json())
             .then((json) => {
                 playlistID = json.id
+                // build promises with a delay between so that fetch requests happen in order
                 const delayIncrement = 500;
                 let delay = 500;
                 const promiseArray = arrSpotifyURIs.map((val) => {
@@ -86,7 +87,7 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                         body: JSON.stringify(val)
                         }))
                 })
-                console.log(promiseArray)
+                // resolve the promises from above to post to Spotify, then pull a playlist id out of it for making another request to get the metadata for the playlist link
                 Promise.all(promiseArray)
                 .then((res) => Promise.all(res.map((val) => {
                     return val.json()
