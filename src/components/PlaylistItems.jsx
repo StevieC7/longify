@@ -6,9 +6,9 @@ export default function PlaylistItems({playlist}) {
         console.log('initial totalMinutes:',totalMinutes)
         let totalHours = totalMinutes / 60;
         console.log('initial totalHours:', totalHours)
-        totalMinutes = (totalMinutes % 60) * 60
         totalHours = Math.floor(totalHours)
-        totalSeconds = totalSeconds - (totalHours * 60 * 60) - (totalMinutes * 60)
+        totalMinutes = Math.floor(totalMinutes - (Math.floor(totalHours) * 60))
+        totalSeconds = Math.floor(totalSeconds - (totalMinutes * 60) - (totalHours * 60 * 60))
         return `${totalHours >= 10 ? totalHours : `0${totalHours}`}:${totalMinutes >= 10 ? totalMinutes : `0${totalMinutes}`}:${totalSeconds >= 10 ? totalSeconds : `0${totalSeconds}`}`
 
     }
@@ -31,7 +31,8 @@ export default function PlaylistItems({playlist}) {
                             <img className="episode-img" src={val.episode.images[0].url} alt={val.episode.name}></img>
                             <p>{val.episode.name}</p>
                         </div>
-                            <p>{`${Math.floor(val.episode.duration_ms / 1000 / 60)}:${Math.round(((val.episode.duration_ms / 1000 / 60) % (Math.floor(val.episode.duration_ms / 1000 / 60))) * 60)}`}</p>
+                            {/* <p>{`${Math.floor(val.episode.duration_ms / 1000 / 60)}:${Math.round(((val.episode.duration_ms / 1000 / 60) % (Math.floor(val.episode.duration_ms / 1000 / 60))) * 60)}`}</p> */}
+                            <p>{formatDuration(val.episode.duration_ms)}</p>
                     </div>
             )})}
         </div>
