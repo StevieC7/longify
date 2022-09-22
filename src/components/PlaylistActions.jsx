@@ -48,7 +48,6 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                 body: JSON.stringify(playlistMeta)
             })
             .then((res) => res.json())
-            .catch((e) => console.log(e))
             .then((json) => {
                 fetch(`https://api.spotify.com/v1/playlists/${json.id}/tracks`, {
                     method: 'post',
@@ -64,8 +63,7 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                         setAddSuccess(true)
                     }
                 })
-                .catch((e) => {
-                    console.log(e)
+                .catch(() => {
                     setAddSuccess(false)
                 })
             })

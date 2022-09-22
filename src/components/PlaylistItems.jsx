@@ -1,11 +1,8 @@
 export default function PlaylistItems({playlist}) {
     function formatDuration (ms) {
         let totalSeconds = ms / 1000;
-        console.log('initial totalSeconds:',totalSeconds)
         let totalMinutes = totalSeconds / 60;
-        console.log('initial totalMinutes:',totalMinutes)
         let totalHours = totalMinutes / 60;
-        console.log('initial totalHours:', totalHours)
         totalHours = Math.floor(totalHours)
         totalMinutes = Math.floor(totalMinutes - (Math.floor(totalHours) * 60))
         totalSeconds = Math.floor(totalSeconds - (totalMinutes * 60) - (totalHours * 60 * 60))
