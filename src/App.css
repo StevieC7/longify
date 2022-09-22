@@ -108,6 +108,7 @@ header {
 .playlist-meta {
   display: flex;
   align-items: center;
+  background-image: linear-gradient(to right, rgba(0,0,0,0) 18%, rgba(0,0,0,.4) 82%);
 }
 
 .playlist-cover {
