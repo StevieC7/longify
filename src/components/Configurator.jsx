@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FormControl, InputLabel, MenuItem, Select, Slider, Button } from "@mui/material";
 
 export default function Configurator({setUserConfig}) {
-    const initialFormState = {songMix: 50, playLength: 3, sortMethod: 'episodesFirst'}
+    const initialFormState = {songMix: 50, playLength: 3, sortMethod: 'altEpisodesFirst'}
     const [formState, setFormState] = useState(initialFormState)
 
     const handleClick = () => {
@@ -77,7 +77,7 @@ export default function Configurator({setUserConfig}) {
                         onChange={(e) => handleChange(e)}
                         >
                         <MenuItem value={'songsFirst'}>Songs first</MenuItem>
-                        <MenuItem value={'episodesFirst'}>Episodes first</MenuItem>
+                        <MenuItem value={'episodesFirst'}>Podcasts first</MenuItem>
                         <MenuItem value={'altSongsFirst'}>Alternate, start with music</MenuItem>
                         <MenuItem value={'altEpisodesFirst'}>Alternate, start with a podcast</MenuItem>
                     </Select>

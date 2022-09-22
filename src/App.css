@@ -1,5 +1,4 @@
 body {
-  /* background-color: #dfe0dc; */
   vertical-align: middle;
 }
 
@@ -17,6 +16,7 @@ body {
 .home {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   background-color: #083d77;
   color: white;
@@ -66,7 +66,8 @@ header {
 .stickytop {
   position: sticky;
   top: 60px;
-  background-color: #5F634F;
+  /* background-color: #5F634F; */
+  background-color: #083d77;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -125,5 +126,15 @@ header {
   }
   header {
     border-radius: 0px;
+  }
+  .home {
+    border-radius: 0px;
+  }
+  .home p {
+    text-align: center;
+  }
+  body {
+    background-color: #dfe0dc;
+    background-image: linear-gradient(#dfe0dc, rgba(8,61,119,0.25))
   }
 }
