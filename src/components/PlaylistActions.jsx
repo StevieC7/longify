@@ -15,7 +15,7 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
     const arrSpotifyURIs = splitURIs()
     function splitURIs() {
         if (spotifyURIs.uris.length > 0) {
-            let arrSpotifyURIs = [spotifyURIs, spotifyURIs];
+            let arrSpotifyURIs = [spotifyURIs];
             console.log(arrSpotifyURIs)
             let i = 0;
             while (arrSpotifyURIs[i].uris.length > 100 && arrSpotifyURIs[i].uris.length) {
