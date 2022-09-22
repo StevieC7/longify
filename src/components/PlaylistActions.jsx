@@ -16,7 +16,6 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
     function splitURIs() {
         if (spotifyURIs.uris.length > 0) {
             let arrSpotifyURIs = [spotifyURIs];
-            console.log(arrSpotifyURIs)
             let i = 0;
             while (arrSpotifyURIs[i].uris.length > 100 && arrSpotifyURIs[i].uris.length) {
                 // below creates new object containing the excess
@@ -30,7 +29,6 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                 arrSpotifyURIs[j] = {uris: arrSpotifyURIs[j].uris.slice(0,100)}
                 j++
             }
-            console.log(arrSpotifyURIs)
             return arrSpotifyURIs
         }
     }
