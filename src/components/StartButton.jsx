@@ -2,7 +2,8 @@ import { Button } from "@mui/material"
 import { useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 export default function StartButton({auth, setAuth}) {
-    const redirectURL = encodeURIComponent('https://www.longify.me/callback')
+    // const redirectURL = encodeURIComponent('https://www.longify.me/callback')
+    const redirectURL = encodeURIComponent('http://localhost:8888/callback')
     const scope = encodeURIComponent('user-read-private user-read-email playlist-read-private playlist-modify-public user-library-read user-top-read user-read-recently-played')
     const spotifyState = encodeURIComponent(uuidv4());
     

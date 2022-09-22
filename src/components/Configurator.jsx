@@ -47,7 +47,7 @@ export default function Configurator({setUserConfig}) {
                     defaultValue={50}
                     onChange={(e) => handleChange(e)}
                     valueLabelDisplay='off'
-                    sx={{ color: '#B07BAC', '& .MuiSlider-markLabel': {fontSize: '0.65rem'}}}
+                    sx={{ color: '#B07BAC', '& .MuiSlider-markLabel': {fontSize: '0.6rem'}}}
                     step={10}
                     track={false}
                     marks={songMixMarks}

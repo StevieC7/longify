@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Button } from "@mui/material"
 export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
     const [addSuccess, setAddSuccess] = useState(null)
+    const [playlistDetails, setPlaylistDetails] = useState(null)
     let spotifyURIs = {
         uris: playlist.map((val) => {
             if(val.id) {
@@ -61,6 +62,7 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                 .then((json) => {
                     if (json.snapshot_id) {
                         setAddSuccess(true)
+                        setPlaylistDetails({cover: `${json.images[0].url}`})
                     }
                 })
                 .catch(() => {
@@ -75,7 +77,12 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                 addSuccess === null && addSuccess !== false ? 
                 <Button variant="contained" sx={{margin: '1rem', backgroundColor: '#1DB954', '&:hover': {backgroundColor: '#1DB954'}}} onClick={() => handleAdd()}>Add to Library</Button>
                 :
+                <>
                 <Button variant="contained" sx={{margin: '1rem', backgroundColor: '#1DB954'}} disabled>Added to Library</Button>
+                <div className="playlist-meta">
+                    {playlistDetails ? <img src={playlistDetails.cover} alt='playlist cover'/> : <p>loading</p>}
+                </div>
+                </>
             }
         </>
     )
