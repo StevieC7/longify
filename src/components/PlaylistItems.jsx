@@ -1,3 +1,4 @@
+import { MusicNote } from "@mui/icons-material";
 export default function PlaylistItems({playlist}) {
     function formatDuration (ms) {
         let totalSeconds = ms / 1000;
@@ -15,18 +16,21 @@ export default function PlaylistItems({playlist}) {
                 val.name ? 
                     <div key={key} className='playlist-item'>
                         <div className="playlist-item-left">
-                            <p className="song-tag">Song</p>
-                            <p>{val.name}</p>
-                            <p>&nbsp;| {val.artists[0].name}</p>
+                            {/* <p className="song-tag">Song</p> */}
+                            <MusicNote></MusicNote>
+                            <div className="song-and-artist">
+                                <p className="song-name">{val.name}</p>
+                                <p className="song-artist">{val.artists[0].name}</p>
+                            </div>
                         </div>
                             <p>{formatDuration(val.duration_ms)}</p>
                     </div>
                 : 
                     <div key={key} className='playlist-item'>
                         <div className="playlist-item-left">
-                            <p className="episode-tag">Podcast</p>
+                            {/* <p className="episode-tag">Podcast</p> */}
                             <img className="episode-img" src={val.episode.images[0].url} alt={val.episode.name}></img>
-                            <p>{val.episode.name}</p>
+                            <p className="episode-name">{val.episode.name}</p>
                         </div>
                             <p>{formatDuration(val.episode.duration_ms)}</p>
                     </div>

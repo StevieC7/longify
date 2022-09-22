@@ -132,6 +132,19 @@ header {
   align-items: center;
 }
 
+.song-and-artist {
+  display: flex;
+  flex-direction: column;
+}
+
+.song-and-artist p {
+  margin: 0px;
+}
+
+.song-name {
+  font-weight: bold;
+}
+
 .song-tag {
   border: 2px solid #083d77;
   color: #083d77;
@@ -151,8 +164,12 @@ header {
 }
 
 .episode-img {
-  width: 30px;
+  width: 50px;
   margin-right: 0.5rem;
+}
+
+.episode-name {
+  font-weight: bold;
 }
 
 @media screen and (max-width: 420px) {

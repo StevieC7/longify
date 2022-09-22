@@ -58,7 +58,6 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
             let runningFillTime;
             if (finalEpisodeList.length > 0) {
                 fillTime = songLength / initialEpisodeCount * 1000 * 60
-                console.log('adding episode, fillTime:', fillTime)
                 runningFillTime = 0;
                 finalPlaylistArray.push(finalEpisodeList[0])
                 finalEpisodeList.shift()
