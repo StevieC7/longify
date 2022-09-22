@@ -66,9 +66,10 @@ export default function Configurator({setUserConfig}) {
                     min={3}
                     max={12}
                 />
-                <FormControl variant="filled" sx={{width: '100%', marginTop: '2rem', '& .MuiFormLabel-root': {color: '#B07BAC'}, '& .MuiInputLabel-root': {color: '#B07BAC'}}}>
-                    <InputLabel id="sort-method-label" sx={{'& .MuiInputLabel-root': {color: '#B07BAC'}, '& .MuiFormLabel-root': {color: '#B07BAC'}}}>Sort</InputLabel>
+                <FormControl variant="filled" sx={{width: '100%', marginTop: '2rem', '& .MuiFormLabel-root': {color: '#B07BAC'}, '& .MuiInputLabel-root': {color: '#B07BAC'}, '& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused': {color: '#B07BAC'}}}>
+                    <InputLabel id="sort-method-label" sx={{'& .MuiInputLabel-root': {color: '#B07BAC'}, '& .MuiFormLabel-root': {color: '#B07BAC'}, '& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused': {color: '#B07BAC'}}}>Sort</InputLabel>
                     <Select
+                        disableUnderline
                         labelId="sort-method-label"
                         id="sort-method"
                         name="sortMethod"
