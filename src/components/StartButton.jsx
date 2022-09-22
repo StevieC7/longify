@@ -22,7 +22,7 @@ export default function StartButton({auth, setAuth}) {
             sx={{margin: '2rem', backgroundColor: '#1DB954', '&:hover': {backgroundColor: '#1DB954'}}} 
             href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${auth.clientID}&scope=${auth.scope}&redirect_uri=${auth.redirectURL}&state=${auth.spotifyState}&show_dialog=true`}
         >
-            Build Playlist
+            Log in to Spotify
         </Button>
     )
 }
