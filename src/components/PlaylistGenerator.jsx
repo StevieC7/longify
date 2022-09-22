@@ -117,6 +117,37 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
             }
         }
     }
+    
+    function experimentalAltSongsFirst() {
+        let initialEpisodeCount = finalEpisodeList.length;
+        while (finalSongList.length > 0 || finalEpisodeList.length > 0) {
+            let fillTime;
+            let runningFillTime;
+            if (finalEpisodeList.length > 0) {
+                fillTime = songLength / initialEpisodeCount * 1000 * 60
+                runningFillTime = 0;
+            }
+            if (finalSongList.length > 0 && finalEpisodeList.length < 1) {
+                while (finalSongList.length > 0) {
+                    finalPlaylistArray.push(finalSongList[0])
+                    finalSongList.shift()
+                }
+            }
+            while (runningFillTime < fillTime) {
+                if (finalSongList.length > 0) {
+                    runningFillTime += finalSongList[0].duration_ms
+                    finalPlaylistArray.push(finalSongList[0])
+                    finalSongList.shift()
+                } else {
+                    runningFillTime = fillTime
+                }
+            }
+            if (finalEpisodeList.length > 0) {
+                finalPlaylistArray.push(finalEpisodeList[0])
+                finalEpisodeList.shift()
+            }
+        }     
+    }
 
     function experimentalAltEpisodesFirst() {
         let initialEpisodeCount = finalEpisodeList.length
@@ -163,6 +194,9 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
         }
         if (sortMethod === 'experimentalAltEpisodesFirst') {
             return experimentalAltEpisodesFirst()
+        }
+        if (sortMethod === 'experimentalAltSongsFirst') {
+            return experimentalAltSongsFirst()
         }
     }
     

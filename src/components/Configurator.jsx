@@ -81,7 +81,8 @@ export default function Configurator({setUserConfig}) {
                         <MenuItem value={'episodesFirst'}>Podcasts first</MenuItem>
                         <MenuItem value={'altSongsFirst'}>Alternate, start with music</MenuItem>
                         <MenuItem value={'altEpisodesFirst'}>Alternate, start with a podcast</MenuItem>
-                        <MenuItem value={'experimentalAltEpisodesFirst'}>Experimental Sort</MenuItem>
+                        <MenuItem value={'experimentalAltEpisodesFirst'}>Experimental sort podcasts First</MenuItem>
+                        <MenuItem value={'experimentalAltSongsFirst'}>Experimental sort songs First</MenuItem>
                     </Select>
                 </FormControl>
             </div>
