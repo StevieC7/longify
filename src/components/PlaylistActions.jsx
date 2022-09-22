@@ -71,14 +71,26 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
             .then((res) => res.json())
             .then((json) => {
                 playlistID = json.id
-                fetch(`https://api.spotify.com/v1/playlists/${json.id}/tracks`, {
-                    method: 'post',
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(spotifyURIs)
+                // fetch(`https://api.spotify.com/v1/playlists/${json.id}/tracks`, {
+                //     method: 'post',
+                //     headers: {
+                //         'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                //         'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify(spotifyURIs)
+                // })
+                // ---------- experimental below ---------
+                arrSpotifyURIs.forEach((val) => {
+                    fetch(`https://api.spotify.com/v1/playlists/${json.id}/tracks`, {
+                        method: 'post',
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(val)
+                    })  
                 })
+                // ---------- end experiment -------------
                 .then((res) => res.json())
                 .then((json) => {
                     if (json.snapshot_id) {
