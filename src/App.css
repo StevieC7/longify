@@ -1,27 +1,52 @@
-body {
-  vertical-align: middle;
+/* body {
+  background-color: #dfe0dc;
+} */
+
+.home {
+  max-width: 100vw;
+  height: 100vh;
+  margin: 0px;
+  background-image: url(https://media.giphy.com/media/blSTtZehjAZ8I/giphy.gif);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.App {
+.main {
+  max-width: 100vw;
+  margin: 0px;
+  border-radius: 0px;
+  background-color: white;
   display: flex;
-  background-color: #dfe0dc;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-wrapper {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   max-width: 600px;
-  margin: 5% auto 5% auto;
   border-radius: 15px;
 }
 
-.home {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.home .page-wrapper {
   background-color: #083d77;
   color: white;
-  width: 100%;
-  border-radius: 15px;
+}
+
+.home .page-wrapper p {
+  width: 80%;
+  text-align: center;
+}
+
+.main .page-wrapper {
+  background-color: #dfe0dc;
+  margin: 5% 0px;
 }
 
 header {
@@ -50,10 +75,10 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
+  width: 90%;
 }
 .configuration-wrapper > * {
-  width: 100%;
+  width: 80%;
   margin-top: 2rem;
 }
 
@@ -120,21 +145,27 @@ header {
     font-size: 12px;
   }
   .App {
-    margin: 0px;
     padding: 0px;
-    border-radius: 0px;
-  }
-  header {
-    border-radius: 0px;
-  }
-  .home {
-    border-radius: 0px;
-  }
-  .home p {
-    text-align: center;
   }
   body {
     background-color: #dfe0dc;
-    background-image: linear-gradient(#dfe0dc, rgba(8,61,119,0.25))
+  }
+  .home {
+    background-position: center;
+    align-items: flex-end;
+  }
+  .page-wrapper {
+    border-radius: 0px;
+    margin: 0px;
+  }
+  .main {
+    background-color: #dfe0dc;
+  }
+  .main .page-wrapper {
+    margin: 0px;
+    width: 100%;
+  }
+  header {
+    border-radius: 0px;
   }
 }

@@ -7,20 +7,22 @@ export default function Main(props) {
     const [userConfig, setUserConfig] = useState({})
     
     return(
-    <>
-    <Header />
-    {
-        userConfig.songMix !== undefined ? 
-        <PlaylistPreview userConfig={userConfig} setUserConfig={setUserConfig}/> 
-        : 
-        <></>
-    }
-    {
-        userConfig.songMix === undefined ? 
-        <Configurator setUserConfig={setUserConfig}/> 
-        : 
-        <></>
-    }
-    </>
+    <div className="main">
+        <div className="page-wrapper">
+            <Header />
+            {
+                userConfig.songMix !== undefined ? 
+                <PlaylistPreview userConfig={userConfig} setUserConfig={setUserConfig}/> 
+                : 
+                <></>
+            }
+            {
+                userConfig.songMix === undefined ? 
+                <Configurator setUserConfig={setUserConfig}/> 
+                : 
+                <></>
+            }
+        </div>
+    </div>
     )
 }
