@@ -13,6 +13,7 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
         })}
     // add function to split the list up until all URI lists would be shorter than 100 items (limit set by Spotify API)
     const arrSpotifyURIs = splitURIs()
+    console.log(arrSpotifyURIs)
     function splitURIs() {
         if (spotifyURIs.uris.length > 0) {
             let arrSpotifyURIs = [spotifyURIs];
@@ -82,18 +83,23 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                 //     body: JSON.stringify(spotifyURIs)
                 // })
                 // ---------- experimental below ---------
-                arrSpotifyURIs.forEach((val) => {
-                    fetch(`https://api.spotify.com/v1/playlists/${json.id}/tracks`, {
+                const promiseArray = arrSpotifyURIs.map((val) => {
+                        return fetch(`https://api.spotify.com/v1/playlists/${json.id}/tracks`, {
                         method: 'post',
                         headers: {
                             'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify(val)
-                    })  
-                    .then((res) => res.json())
+                        })
+                    })
+                    Promise.all(promiseArray)
+                    .then((res) => Promise.all(res.map((val) => {
+                        return val.json()
+                    })))
                     .then((json) => {
-                        if (json.snapshot_id) {
+                        console.log("here's the thing in the promise:", json)
+                        if (json[0].snapshot_id) {
                             setAddSuccess(true)
                             fetch(`https://api.spotify.com/v1/playlists/${playlistID}`, {
                                 headers: {
@@ -107,8 +113,7 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                     })
                     .catch(() => {
                         setAddSuccess(false)
-                    })
-                })
+                    }) 
                 // ---------- end experiment -------------
             })
         })
