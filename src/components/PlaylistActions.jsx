@@ -73,36 +73,40 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
             .then((res) => res.json())
             .then((json) => {
                 playlistID = json.id
+                const delayIncrement = 500;
+                let delay = 500;
                 const promiseArray = arrSpotifyURIs.map((val) => {
-                        return fetch(`https://api.spotify.com/v1/playlists/${json.id}/tracks`, {
+                    delay += delayIncrement
+                    return new Promise(resolve => setTimeout(resolve, delay)).then(() => fetch(`https://api.spotify.com/v1/playlists/${json.id}/tracks`, {
                         method: 'post',
                         headers: {
                             'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify(val)
+                        }))
+                })
+                console.log(promiseArray)
+                Promise.all(promiseArray)
+                .then((res) => Promise.all(res.map((val) => {
+                    return val.json()
+                })))
+                .then((json) => {
+                    if (json[0].snapshot_id) {
+                        setAddSuccess(true)
+                        fetch(`https://api.spotify.com/v1/playlists/${playlistID}`, {
+                            headers: {
+                                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                                'Content-Type': 'application/json'
+                            }
                         })
-                    })
-                    Promise.all(promiseArray)
-                    .then((res) => Promise.all(res.map((val) => {
-                        return val.json()
-                    })))
-                    .then((json) => {
-                        if (json[0].snapshot_id) {
-                            setAddSuccess(true)
-                            fetch(`https://api.spotify.com/v1/playlists/${playlistID}`, {
-                                headers: {
-                                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-                                    'Content-Type': 'application/json'
-                                }
-                            })
-                            .then((res) => res.json())
-                            .then((json) => setPlaylistDetails({cover: `${json.images[0].url}`, playLink: `${json.external_urls.spotify}`, name: `${json.name}`}))
-                        }
-                    })
-                    .catch(() => {
-                        setAddSuccess(false)
-                    })
+                        .then((res) => res.json())
+                        .then((json) => setPlaylistDetails({cover: `${json.images[0].url}`, playLink: `${json.external_urls.spotify}`, name: `${json.name}`}))
+                    }
+                })
+                .catch(() => {
+                    setAddSuccess(false)
+                })
             })
         })
     }
