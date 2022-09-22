@@ -13,7 +13,6 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
         })}
     // add function to split the list up until all URI lists would be shorter than 100 items (limit set by Spotify API)
     const arrSpotifyURIs = splitURIs()
-    console.log(arrSpotifyURIs)
     function splitURIs() {
         if (spotifyURIs.uris.length > 0) {
             let arrSpotifyURIs = [spotifyURIs];
@@ -74,15 +73,6 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
             .then((res) => res.json())
             .then((json) => {
                 playlistID = json.id
-                // fetch(`https://api.spotify.com/v1/playlists/${json.id}/tracks`, {
-                //     method: 'post',
-                //     headers: {
-                //         'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-                //         'Content-Type': 'application/json'
-                //     },
-                //     body: JSON.stringify(spotifyURIs)
-                // })
-                // ---------- experimental below ---------
                 const promiseArray = arrSpotifyURIs.map((val) => {
                         return fetch(`https://api.spotify.com/v1/playlists/${json.id}/tracks`, {
                         method: 'post',
@@ -98,7 +88,6 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                         return val.json()
                     })))
                     .then((json) => {
-                        console.log("here's the thing in the promise:", json)
                         if (json[0].snapshot_id) {
                             setAddSuccess(true)
                             fetch(`https://api.spotify.com/v1/playlists/${playlistID}`, {
@@ -113,8 +102,7 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                     })
                     .catch(() => {
                         setAddSuccess(false)
-                    }) 
-                // ---------- end experiment -------------
+                    })
             })
         })
     }
