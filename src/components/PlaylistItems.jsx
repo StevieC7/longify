@@ -21,7 +21,6 @@ export default function PlaylistItems({playlist}) {
                             <p className="song-tag">Song</p>
                             <p>{val.name}</p>
                         </div>
-                            {/* <p>{`${Math.floor(val.duration_ms / 1000 / 60)}:${Math.round(((val.duration_ms / 1000 / 60) % (Math.floor(val.duration_ms / 1000 / 60))) * 60)}`}</p> */}
                             <p>{formatDuration(val.duration_ms)}</p>
                     </div>
                 : 
@@ -31,7 +30,6 @@ export default function PlaylistItems({playlist}) {
                             <img className="episode-img" src={val.episode.images[0].url} alt={val.episode.name}></img>
                             <p>{val.episode.name}</p>
                         </div>
-                            {/* <p>{`${Math.floor(val.episode.duration_ms / 1000 / 60)}:${Math.round(((val.episode.duration_ms / 1000 / 60) % (Math.floor(val.episode.duration_ms / 1000 / 60))) * 60)}`}</p> */}
                             <p>{formatDuration(val.episode.duration_ms)}</p>
                     </div>
             )})}
