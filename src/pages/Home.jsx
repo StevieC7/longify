@@ -7,6 +7,7 @@ export default function Home(props) {
     return(
         <div className='home'>
             <div className='page-wrapper'>
+                <img src={`${process.env.PUBLIC_URL}/longify512.png`} className="logo" alt="logo"></img>
                 <h1>Longify</h1>
                 <p>Generate long playlists mixing songs and podcasts. Only for Spotify.</p>
                 { localStorage.getItem('accessToken') ? <Button variant="contained" sx={{margin: '2rem', backgroundColor: '#1DB954', '&:hover': {backgroundColor: '#1DB954'}}} href='/make'>Make Playlist</Button>: <StartButton setAuth={setAuth} auth={auth}/>}
