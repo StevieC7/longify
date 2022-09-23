@@ -21,4 +21,7 @@ Longify uses:
 ## Getting Started
 To build your playlist, log in to Spotify through [Longify](https://www.longify.me), then configure your options and click 'get playlist.' This will generate a preview, which you can choose to add to your library or scrap before generating a new preview.
 
-If you want to run this locally, fork and clone the main branch to your machine for a stable build. If you're feeling dangerous, fork and clone the dev branch. Be aware that you will have to configure the auth flow to work with your own Spotify API client id, because the production version stores sensitive information in the hosting service's environment.
+## Contributing
+To make suggestions, create issues in Github with a descriptive title. For example, use `bug` for a bug and `feature` for a new feature request.
+
+To contribute, open an `access request` issue to be added to the developer list. If granted access, you will receive information for how to test locally. Typically, this means fork and clone from the dev branch, then work and test locally following git best practices. After testing locally, merge your new branch back to dev and make a pull request to the dev branch in the main repo.
