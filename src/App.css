@@ -65,12 +65,17 @@ header {
   justify-content: space-between;
   align-items: center;
   color: white;
+  overflow: hidden;
 }
 
 .header-inner * {
   margin: 1rem;
 }
-
+.logo {
+  margin: 0.5rem;
+  max-width: 80px;
+  height: auto;
+}
 .configuration-wrapper {
   display: flex;
   flex-direction: column;
