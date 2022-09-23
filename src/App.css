@@ -172,6 +172,19 @@ header {
   font-weight: bold;
 }
 
+.episode-and-show {
+  display: flex;
+  flex-direction: column;
+}
+
+.episode-and-show p {
+  margin: 0px;
+}
+
+.episode-name {
+  font-weight: bold;
+}
+
 .song-tag {
   border: 2px solid #083d77;
   color: #083d77;
@@ -197,6 +210,19 @@ header {
 
 .episode-name {
   font-weight: bold;
+}
+
+.spotify-attribution {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.spotify-logo {
+  min-width: 70px;
+  max-width: 140px;
+  margin: 21px;
 }
 
 @media screen and (max-width: 480px) {

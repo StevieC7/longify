@@ -20,7 +20,7 @@ export default function PlaylistItems({playlist}) {
                             <MusicNote></MusicNote>
                             <div className="song-and-artist">
                                 <p className="song-name">{val.name}</p>
-                                <p className="song-artist">{val.artists[0].name}</p>
+                                <p className="song-artist">{val.artists[0].name} | {val.album.name}</p>
                             </div>
                         </div>
                             <p>{formatDuration(val.duration_ms)}</p>
@@ -30,7 +30,10 @@ export default function PlaylistItems({playlist}) {
                         <div className="playlist-item-left">
                             {/* <p className="episode-tag">Podcast</p> */}
                             <img className="episode-img" src={val.episode.images[0].url} alt={val.episode.name}></img>
-                            <p className="episode-name">{val.episode.name}</p>
+                            <div className="episode-and-show">
+                                <p className="episode-name">{val.episode.name}</p>
+                                <p className="show-name">{val.episode.show.name}</p>
+                            </div>
                         </div>
                             <p>{formatDuration(val.episode.duration_ms)}</p>
                     </div>
