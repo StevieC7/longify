@@ -37,6 +37,7 @@
 .home .page-wrapper {
   background-color: #083d77;
   color: white;
+  padding-top: 2rem;
 }
 
 .home .page-wrapper p {
@@ -65,10 +66,22 @@ header {
   justify-content: space-between;
   align-items: center;
   color: white;
+  overflow: hidden;
 }
 
 .header-inner * {
   margin: 1rem;
+}
+
+.logo {
+  margin: 0.5rem;
+  max-width: 80px;
+  height: auto;
+}
+.logo-small {
+  margin: 0.5rem;
+  max-width: 40px;
+  height: auto;
 }
 
 .configuration-wrapper {
@@ -172,7 +185,7 @@ header {
   font-weight: bold;
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 480px) {
   :root {
     font-size: 12px;
   }

@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Button } from "@mui/material"
 export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
     const [addSuccess, setAddSuccess] = useState(null)
-    const [playlistDetails, setPlaylistDetails] = useState({})
+    const [playlistDetails, setPlaylistDetails] = useState(null)
     let playlistID;
     let spotifyURIs = {
         uris: playlist.map((val) => {
@@ -54,6 +54,7 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
         description: 'Playlist created using Longify' 
     }
     const handleAdd = () => {
+        setAddSuccess(true)
         // get user ID so we can do stuff with it
         fetch('https://api.spotify.com/v1/me', {headers: {
             'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
@@ -94,7 +95,6 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                 })))
                 .then((json) => {
                     if (json[0].snapshot_id) {
-                        setAddSuccess(true)
                         fetch(`https://api.spotify.com/v1/playlists/${playlistID}`, {
                             headers: {
                                 'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
@@ -118,24 +118,23 @@ export default function PlaylistActions({ playlist, setPlaylist, userConfig }) {
                 <Button variant="contained" sx={{margin: '1rem', backgroundColor: '#1DB954', '&:hover': {backgroundColor: '#1DB954'}}} onClick={() => handleAdd()}>Add to Library</Button>
                 :
                 <>
-                <div className="playlist-meta">
                     {
-                        playlistDetails ? 
-                            <>
-                            <a href={playlistDetails.playLink}>
-                                <img src={playlistDetails.cover} alt='playlist cover' className="playlist-cover" />
-                            </a>
-                            <div>
-                                <p className="playlist-name">{playlistDetails.name}</p>
-                                <Button variant="contained" sx={{margin: '0.5rem 1rem', backgroundColor: '#1DB954', '&:hover': {backgroundColor: '#19B550'}}} href={playlistDetails.playLink}>Open in Spotify</Button>
-                            </div>
-                            </> 
+                        playlistDetails !== null ? 
+                            <div className="playlist-meta">
+                                <a href={playlistDetails.playLink}>
+                                    <img src={playlistDetails.cover} alt='playlist cover' className="playlist-cover" />
+                                </a>
+                                <div>
+                                    <p className="playlist-name">{playlistDetails.name}</p>
+                                    <Button variant="contained" sx={{margin: '0.5rem 1rem', backgroundColor: '#1DB954', '&:hover': {backgroundColor: '#19B550'}}} href={playlistDetails.playLink}>Open in Spotify</Button>
+                                </div>
+                            </div> 
                         : 
-                            <Button variant="contained" sx={{margin: '1rem', backgroundColor: '#1DB954'}} disabled>Added to Library</Button>
+                            <Button variant="contained" sx={{margin: '1rem', '&:disabled': {backgroundColor: '#1DB954'}}} disabled>Adding to Library</Button>
                     }
-                </div>
                 </>
             }
+            {addSuccess === false ? <p>An error has occurred. Please reload and try again.</p> : <></>}
         </>
     )
 }
