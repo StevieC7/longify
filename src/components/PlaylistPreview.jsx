@@ -26,7 +26,7 @@ export default function PlaylistPreview({userConfig, setUserConfig}) {
         <PlaylistSummary playlist={playlist} />
         <PlaylistItems playlist={playlist} />
         <div className="spotify-attribution">
-            <img src={`${process.env.PUBLIC_URL}/Spotify_Logo_RGB_Black.png`} className="spotify-logo"></img>
+            <img src={`${process.env.PUBLIC_URL}/Spotify_Logo_RGB_Black.png`} className="spotify-logo" alt="spotify-logo"></img>
             <p>All metadata provided by Spotify. Longify does not claim the rights to any of this content.</p>
         </div>
         </>
