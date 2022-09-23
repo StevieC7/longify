@@ -195,13 +195,17 @@ header {
   body {
     background-color: #dfe0dc;
   }
+  .page-wrapper {
+    border-radius: 0px;
+    margin: 0px;
+  }
   .home {
     background-position: center;
     align-items: flex-end;
   }
-  .page-wrapper {
-    border-radius: 0px;
-    margin: 0px;
+  .home .page-wrapper {
+    width: 100%;
+    margin-bottom: 5vh;
   }
   .main {
     background-color: #dfe0dc;
