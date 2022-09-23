@@ -9,7 +9,7 @@ export default function Main(props) {
     return(
     <div className="main">
         <div className="page-wrapper">
-            <Header />
+            <Header userConfig={userConfig}/>
             {
                 userConfig.songMix !== undefined ? 
                 <PlaylistPreview userConfig={userConfig} setUserConfig={setUserConfig}/> 
