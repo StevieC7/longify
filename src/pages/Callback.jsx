@@ -11,10 +11,20 @@ export default function Callback(props) {
 
     const state = getParametersFromHash(useLocation().hash, 'state')
     // eslint-disable-next-line
-    const accessToken = getParametersFromHash(useLocation().hash, 'access\_token')
-    localStorage.setItem('accessToken', accessToken)
+    const code = getParametersFromHash(useLocation().hash, 'code')
 
     useEffect(() => {
+        fetch(`https://accounts.spotify.com/api/token`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `grant_type=authorization_code&code=${code}&redirect_uri=${process.env.REACT_APP_redirect}`
+        })
+        .then(res => res.json())
+        .then(data => {
+            localStorage.setItem('accessToken', data.access_token)
+        })
         navigate('/make')
     })
 
