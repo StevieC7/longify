@@ -14,12 +14,9 @@ export default function Callback(props) {
     const code = getParametersFromHash(useLocation().hash, 'code')
 
     useEffect(() => {
-        fetch(`https://accounts.spotify.com/api/token`, {
+        fetch('/.netlify/functions/tokenRequest', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `grant_type=authorization_code&code=${code}&redirect_uri=${process.env.REACT_APP_redirect}`
+            body: JSON.stringify({code: code, redirect: process.env.REACT_APP_redirect})
         })
         .then(res => res.json())
         .then(data => {
