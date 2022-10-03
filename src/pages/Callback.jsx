@@ -8,10 +8,10 @@ export default function Callback(props) {
         let match = url.match(myRegex);
         return(match ? match[1] : 'none found');
     }
-
     // eslint-disable-next-line
-    const code = getParametersFromHash(useLocation().hash, 'code')
-    const state = getParametersFromHash(useLocation().hash, 'state')
+    const code = getParametersFromHash(useLocation().search, 'code')
+    const state = getParametersFromHash(useLocation().search, 'state')
+    console.log('State is',state)
 
     useEffect(() => {
         fetch('/.netlify/functions/tokenRequest', {
@@ -23,7 +23,7 @@ export default function Callback(props) {
             localStorage.setItem('accessToken', data.access_token)
             console.log(data)
         })
-        navigate('/make')
+        // navigate('/make')
     })
 
     if (state !== localStorage.getItem('spotifyState')) {

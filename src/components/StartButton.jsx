@@ -10,10 +10,10 @@ export default function StartButton({auth, setAuth}) {
             const data = await response.json()
             return data
         }
-        // const resolveURL = async () => {
-            //     const redirectURL = await getRedirectURL().then(data => data)
-            // }
-            getRedirectURL().then(data => setRedir(data))
+        getRedirectURL().then(data => {
+            localStorage.setItem('spotifyState', data.state)
+            setRedir(data)
+        })
     }, [])
     return(
         <Button 
