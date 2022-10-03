@@ -1,4 +1,5 @@
 // need this because I'll be using my client ID and client secret
+const fetch = require('node-fetch')
 
 clientID = process.env.CLIENT_ID
 clientSecret = process.env.CLIENT_SECRET
