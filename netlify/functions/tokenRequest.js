@@ -6,6 +6,7 @@ clientSecret = process.env.CLIENT_SECRET
 
 exports.handler = async function(event, context) {
     const eventBody = JSON.parse(event.body)
+    console.log('redirect uri at tokenrequest:',eventBody.redirect)
     let accessToken = await fetch(`https://accounts.spotify.com/api/token`, {
             method: 'POST',
             headers: {

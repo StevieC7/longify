@@ -9,6 +9,7 @@ const SPOTIFY_AUTH_URI = 'https://accounts.spotify.com/authorize?response_type=c
 const redirectURL = `${process.env.REDIRECT}`
 const scope = encodeURIComponent('user-read-private user-read-email playlist-read-private playlist-modify-public user-library-read user-top-read user-read-recently-played')
 const spotifyState = encodeURIComponent(uuidv4());
+console.log('redirecturi original:',redirectURL)
 
 exports.handler = async function(event, context) {
         return {
