@@ -15,13 +15,14 @@ export default function Callback(props) {
     useEffect(() => {
         fetch('/.netlify/functions/tokenRequest', {
             method: 'POST',
-            body: JSON.stringify({code: code, redirect: process.env.redirect})
+            body: JSON.stringify({code: code, redirect: process.env.REDIRECT})
         })
         .then(res => res.json())
         .then(data => {
             localStorage.setItem('accessToken', data.accessToken)
         })
         navigate('/make')
+        // eslint-ignore-next-line
     },[code])
 
     if (state !== localStorage.getItem('spotifyState')) {
