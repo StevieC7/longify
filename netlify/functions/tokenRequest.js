@@ -16,8 +16,10 @@ exports.handler = async function(event, context) {
         })
         .then(res => res.json())
         .then(json => {
+            console.log(json)
             return json.access_token
         })
+        .catch(err => console.log(err))
     return {
         'statusCode': 200,
         'headers': {
