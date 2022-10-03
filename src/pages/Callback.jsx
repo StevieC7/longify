@@ -8,15 +8,21 @@ export default function Callback(props) {
         let match = url.match(myRegex);
         return(match ? match[1] : 'none found');
     }
-
-    const state = getParametersFromHash(useLocation().hash, 'state')
     // eslint-disable-next-line
-    const accessToken = getParametersFromHash(useLocation().hash, 'access\_token')
-    localStorage.setItem('accessToken', accessToken)
+    const code = getParametersFromHash(useLocation().search, 'code')
+    const state = getParametersFromHash(useLocation().search, 'state')
 
     useEffect(() => {
+        fetch('/.netlify/functions/tokenRequest', {
+            method: 'POST',
+            body: JSON.stringify({code: code, redirect: process.env.REACT_APP_redirect})
+        })
+        .then(res => res.json())
+        .then(data => {
+            localStorage.setItem('accessToken', data.accessToken)
+        })
         navigate('/make')
-    })
+    },[code])
 
     if (state !== localStorage.getItem('spotifyState')) {
         return(
