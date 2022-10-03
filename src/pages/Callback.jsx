@@ -22,7 +22,7 @@ export default function Callback(props) {
             localStorage.setItem('accessToken', data.accessToken)
         })
         navigate('/make')
-        // eslint-ignore-next-line
+        // eslint-disable-next-line
     },[code])
 
     if (state !== localStorage.getItem('spotifyState')) {
