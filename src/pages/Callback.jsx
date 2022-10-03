@@ -18,13 +18,13 @@ export default function Callback(props) {
             method: 'POST',
             body: JSON.stringify({code: code, redirect: process.env.REACT_APP_redirect})
         })
-        .then(res => res.json())
+        .then(res => console.log(res.json()))
         .then(data => {
-            localStorage.setItem('accessToken', data.access_token)
+            localStorage.setItem('accessToken', data.accessToken)
             console.log(data)
         })
         // navigate('/make')
-    })
+    },[])
 
     if (state !== localStorage.getItem('spotifyState')) {
         return(
