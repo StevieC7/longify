@@ -12,10 +12,10 @@ const spotifyState = encodeURIComponent(uuidv4());
 
 exports.handler = async function(event, context) {
         return {
-            'statusCode': 302,
+            'statusCode': 200,
             'headers': {
                 'Content-Type': 'application/json',
-                'Location': `${SPOTIFY_AUTH_URI}client_id=${clientID}&scope=${scope}&redirect_uri=${redirectURL}&state=${spotifyState}`
-            }
+            },
+            'body': JSON.stringify({'redirect': `${SPOTIFY_AUTH_URI}client_id=${clientID}&scope=${scope}&redirect_uri=${redirectURL}&state=${spotifyState}`})
         }
 }

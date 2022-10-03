@@ -9,9 +9,9 @@ export default function Callback(props) {
         return(match ? match[1] : 'none found');
     }
 
-    const state = getParametersFromHash(useLocation().hash, 'state')
     // eslint-disable-next-line
     const code = getParametersFromHash(useLocation().hash, 'code')
+    const state = getParametersFromHash(useLocation().hash, 'state')
 
     useEffect(() => {
         fetch('/.netlify/functions/tokenRequest', {
@@ -21,6 +21,7 @@ export default function Callback(props) {
         .then(res => res.json())
         .then(data => {
             localStorage.setItem('accessToken', data.access_token)
+            console.log(data)
         })
         navigate('/make')
     })
