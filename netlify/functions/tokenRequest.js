@@ -1,5 +1,5 @@
 // need this because I'll be using my client ID and client secret
-import('node-fetch')
+import fetch from 'node-fetch'
 
 clientID = process.env.CLIENT_ID
 clientSecret = process.env.CLIENT_SECRET
