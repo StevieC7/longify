@@ -15,7 +15,7 @@ export default function Callback(props) {
     useEffect(() => {
         fetch('/.netlify/functions/tokenRequest', {
             method: 'POST',
-            body: JSON.stringify({code: code, redirect: process.env.REACT_APP_redirect})
+            body: JSON.stringify({code: code, redirect: process.env.redirect})
         })
         .then(res => res.json())
         .then(data => {
