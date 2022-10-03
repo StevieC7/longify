@@ -11,7 +11,6 @@ export default function Callback(props) {
     // eslint-disable-next-line
     const code = getParametersFromHash(useLocation().search, 'code')
     const state = getParametersFromHash(useLocation().search, 'state')
-    console.log('State is',state)
 
     useEffect(() => {
         fetch('/.netlify/functions/tokenRequest', {
@@ -20,7 +19,6 @@ export default function Callback(props) {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             localStorage.setItem('accessToken', data.accessToken)
         })
         navigate('/make')

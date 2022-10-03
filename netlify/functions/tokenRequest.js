@@ -15,7 +15,6 @@ exports.handler = async function(event, context) {
         })
         .then(res => res.json())
         .then(json => {
-            console.log('json from tokenrequest:',json)
             return json.access_token
         })
     return {
