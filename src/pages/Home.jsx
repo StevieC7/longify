@@ -10,7 +10,11 @@ export default function Home(props) {
                 <img src={`${process.env.PUBLIC_URL}/longify512.png`} className="logo" alt="logo"></img>
                 <h1>Longify</h1>
                 <p>Generate long playlists mixing songs and podcasts. Only for Spotify.</p>
-                { localStorage.getItem('accessToken') ? <Button variant="contained" sx={{margin: '2rem', backgroundColor: '#1DB954', '&:hover': {backgroundColor: '#1DB954'}}} href='/make'>Make Playlist</Button>: <StartButton setAuth={setAuth} auth={auth}/>}
+                { 
+                    localStorage.getItem('access_token') && new Date() > localStorage.getItem('tokenDuration') + localStorage.getItem('tokenCreated').getTime() 
+                        ? <Button variant="contained" sx={{margin: '2rem', backgroundColor: '#1DB954', '&:hover': {backgroundColor: '#1DB954'}}} href='/make'>Make Playlist</Button>
+                        : <StartButton setAuth={setAuth} auth={auth}/>
+                }
             </div>
         </div>
     )

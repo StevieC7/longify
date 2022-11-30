@@ -20,6 +20,8 @@ export default function Callback(props) {
         .then(res => res.json())
         .then(data => {
             localStorage.setItem('accessToken', data.accessToken)
+            localStorage.setItem('tokenDuration', data.expires_in)
+            localStorage.setItem('tokenCreated',new Date())
         })
         navigate('/make')
         // eslint-disable-next-line
