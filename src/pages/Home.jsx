@@ -11,7 +11,7 @@ export default function Home(props) {
                 <h1>Longify</h1>
                 <p>Generate long playlists mixing songs and podcasts. Only for Spotify.</p>
                 { 
-                    localStorage.getItem('access_token') && new Date().getTime() < (localStorage.getItem('tokenDuration') + new Date(localStorage.getItem('tokenCreated')).getTime()) 
+                    localStorage.accessToken && new Date().getTime() < (localStorage.tokenDuration + new Date(localStorage.tokenCreated).getTime())
                         ? <Button variant="contained" sx={{margin: '2rem', backgroundColor: '#1DB954', '&:hover': {backgroundColor: '#1DB954'}}} href='/make'>Make Playlist</Button>
                         : <StartButton setAuth={setAuth} auth={auth}/>
                 }
