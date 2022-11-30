@@ -17,6 +17,9 @@ exports.handler = async function(event, context) {
             'headers': {
                 'Content-Type': 'application/json',
             },
-            'body': JSON.stringify({'redirect': `${SPOTIFY_AUTH_URI}client_id=${clientID}&scope=${scope}&redirect_uri=${redirectURL}&state=${spotifyState}`})
+            'body': JSON.stringify({
+                'redirect': `${SPOTIFY_AUTH_URI}client_id=${clientID}&scope=${scope}&redirect_uri=${redirectURL}&state=${spotifyState}`
+                , 'state': `${spotifyState}`
+            })
         }
 }
