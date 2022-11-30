@@ -21,7 +21,7 @@ export default function Callback(props) {
         .then(data => {
             console.log(data)
             localStorage.setItem('accessToken', data.accessToken)
-            localStorage.setItem('tokenDuration', data.tokenDuration)
+            localStorage.setItem('tokenDuration', parseInt(data.tokenDuration))
             localStorage.setItem('tokenCreated',new Date())
         })
         navigate('/make')
