@@ -18,7 +18,7 @@ exports.handler = async function(event, context) {
         .then(res => res.json())
         .then(json => {
             console.log(json)
-            return json.access_token
+            return json
         })
         .catch(err => console.log(err))
     return {
@@ -26,6 +26,9 @@ exports.handler = async function(event, context) {
         'headers': {
             'Content-Type': 'application/json'
         },
-        'body': JSON.stringify({'accessToken':`${accessToken}`}) // necessary data from fetch here
+        'body': JSON.stringify({
+            'accessToken': `${accessToken.access_token}`
+            , 'tokenDuration': accessToken.expires_in
+        }) // necessary data from fetch here
     }
 }
