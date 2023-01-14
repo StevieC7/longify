@@ -56,7 +56,7 @@ export default function SpotifyFetcher({userConfig, setFetchedItems}) {
             console.log(episodeList)
             setFetchedItems({
                 'songList': arr[0]
-                , 'episodeList': episodeList
+                , 'episodeList': episodeList[0]
             })
         })
     }
