@@ -17,7 +17,9 @@ export default function SpotifyFetcher({userConfig, setFetchedItems}) {
     
     // get a chunk of songs and episodes to fill the user's specified time for songs (this is using the bangers only approach for now by grabbing user's top 50 songs, but you can do more if you use tracks endpoint for recommendations based on seed track)
     const getFromSpotify = async () => {
-        const showList = await fetch(`${baseSpotifyURL}/me/shows?limit=50`, getSongsInit).catch((err) => err)
+        const showList = await fetch(`${baseSpotifyURL}/me/shows?limit=50`, getSongsInit)
+            .then((val)=>val.json())
+            .catch((err) => err)
         const fetchList = showList.map((val) => {
             return fetch(`${baseSpotifyURL}/shows/${val.id}/episodes`, getSongsInit).catch((err) => err)
         })
