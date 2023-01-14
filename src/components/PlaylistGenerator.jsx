@@ -30,7 +30,7 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
     }
     let clonedEpisodes;
     if (fetchedItems.episodeList.items) {
-       clonedEpisodes = [...fetchedItems.episodeList.items]
+        clonedEpisodes = [...fetchedItems.episodeList.items]
     } else {
         clonedEpisodes = [...fetchedItems.episodeList.tracks]
     }
