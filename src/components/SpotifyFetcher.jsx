@@ -26,7 +26,7 @@ export default function SpotifyFetcher({userConfig, setFetchedItems}) {
                 return fetch(`${baseSpotifyURL}/shows/${val.id}/episodes`, getSongsInit).catch((err) => err)
             })
         } else {
-            fetchList = [fetch(`${baseSpotifyURL}/search?q=a%20tag:new&type=track`).catch((err) => err)]
+            fetchList = [fetch(`${baseSpotifyURL}/search?q=tag:new&type=track`, getSongsInit).catch((err) => err)]
         }
         Promise.all([
             fetch(`${baseSpotifyURL}/me/top/tracks?limit=50`, getSongsInit).catch((err) => err), 
