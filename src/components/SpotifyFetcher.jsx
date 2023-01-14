@@ -21,7 +21,7 @@ export default function SpotifyFetcher({userConfig, setFetchedItems}) {
             .then((res)=> res.json())
             .catch((err) => err)
         let fetchList;
-        if (showList.items) {
+        if (showList.items.length > 0) {
             fetchList = showList.items.map((val) => {
                 return fetch(`${baseSpotifyURL}/shows/${val.id}/episodes`, getSongsInit).catch((err) => err)
             })
