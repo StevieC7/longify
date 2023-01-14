@@ -30,7 +30,7 @@ export default function SpotifyFetcher({userConfig, setFetchedItems}) {
                 .then((res) => res.json())
                 .then((val) => val.genres)
                 .catch((err) => err)
-            fetchList = [fetch(`${baseSpotifyURL}/recommendations?seed_genres=${genreSeeds.join()}`, getSongsInit).catch((err)=>err)]
+            fetchList = [fetch(`${baseSpotifyURL}/recommendations?seed_genres=${genreSeeds.slice(0,5).join()}`, getSongsInit).catch((err)=>err)]
         }
         Promise.all([
             fetch(`${baseSpotifyURL}/me/top/tracks?limit=50`, getSongsInit).catch((err) => err), 
