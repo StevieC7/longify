@@ -26,7 +26,11 @@ export default function SpotifyFetcher({userConfig, setFetchedItems}) {
                 return fetch(`${baseSpotifyURL}/shows/${val.id}/episodes`, getSongsInit).catch((err) => err)
             })
         } else {
-            fetchList = [fetch(`${baseSpotifyURL}/search?q=a%20tag:new&type=track`, getSongsInit).catch((err) => err)]
+            const genreSeeds = await fetch(`${baseSpotifyURL}/recommendations/available-genre-seeds`, getSongsInit)
+                .then((res) => res.json())
+                .then((val) => val.genres)
+                .catch((err) => err)
+            fetchList = await fetch(`${baseSpotifyURL}/recommendations?seed_genres${genreSeeds.join()}`, getSongsInit).catch((err)=>err)
         }
         Promise.all([
             fetch(`${baseSpotifyURL}/me/top/tracks?limit=50`, getSongsInit).catch((err) => err), 
