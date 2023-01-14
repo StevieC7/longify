@@ -16,10 +16,14 @@ export default function SpotifyFetcher({userConfig, setFetchedItems}) {
     }
     
     // get a chunk of songs and episodes to fill the user's specified time for songs (this is using the bangers only approach for now by grabbing user's top 50 songs, but you can do more if you use tracks endpoint for recommendations based on seed track)
-    const getFromSpotify = () => {
+    const getFromSpotify = async () => {
+        const showList = await fetch(`${baseSpotifyURL}/me/shows?limit=50`, getSongsInit).catch((err) => err)
+        const fetchList = showList.map((val) => {
+            return fetch(`${baseSpotifyURL}/shows/${val.id}/episodes`, getSongsInit).catch((err) => err)
+        })
         Promise.all([
             fetch(`${baseSpotifyURL}/me/top/tracks?limit=50`, getSongsInit).catch((err) => err), 
-            fetch(`${baseSpotifyURL}/me/episodes?limit=50`, getSongsInit).catch((err) => err)
+            ...fetchList
         ])
         .then((res) => Promise.all(res.map((val) => {
             if (val.status !== 200) {
@@ -27,8 +31,18 @@ export default function SpotifyFetcher({userConfig, setFetchedItems}) {
             }
             return val.json()
         })))
-        .then((arr) => {setFetchedItems({'songList': arr[0], 'episodeList': arr[1]})}
-        )
+        .then((arr) => {
+            let episodeList = []
+            arr.slice(1).forEach((show) => {
+                show.forEach((episode) => {
+                    episodeList.push(episode)
+                })
+            })
+            setFetchedItems({
+                'songList': arr[0]
+                , 'episodeList': episodeList
+            })
+        })
     }
 
     useEffect(() => {
