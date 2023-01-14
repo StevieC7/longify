@@ -28,7 +28,12 @@ export default function PlaylistGenerator({userConfig, fetchedItems, setPlaylist
             finalSongList.push(finalSongList[Math.floor(Math.random()*finalSongList.length)])
         }
     }
-    let clonedEpisodes = [...fetchedItems.episodeList.items]
+    let clonedEpisodes;
+    if (fetchedItems.episodeList.items) {
+       clonedEpisodes = [...fetchedItems.episodeList.items]
+    } else {
+        clonedEpisodes = [...fetchedItems.episodeList.tracks]
+    }
     while (episodesRunningLength < showLength * 1000 * 60) {
         if (clonedEpisodes.length > 0) {
             episodesRunningLength += clonedEpisodes[0].episode.duration_ms
