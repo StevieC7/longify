@@ -20,9 +20,14 @@ export default function SpotifyFetcher({userConfig, setFetchedItems}) {
         const showList = await fetch(`${baseSpotifyURL}/me/shows?limit=50`, getSongsInit)
             .then((res)=> res.json())
             .catch((err) => err)
-        const fetchList = showList.items.map((val) => {
-            return fetch(`${baseSpotifyURL}/shows/${val.id}/episodes`, getSongsInit).catch((err) => err)
-        })
+        let fetchList;
+        if (showList.items) {
+            fetchList = showList.items.map((val) => {
+                return fetch(`${baseSpotifyURL}/shows/${val.id}/episodes`, getSongsInit).catch((err) => err)
+            })
+        } else {
+            fetchList = [fetch(`${baseSpotifyURL}/search?q=tag:new&type=track`).catch((err) => err)]
+        }
         Promise.all([
             fetch(`${baseSpotifyURL}/me/top/tracks?limit=50`, getSongsInit).catch((err) => err), 
             ...fetchList
