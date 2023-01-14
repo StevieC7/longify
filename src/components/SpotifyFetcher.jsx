@@ -1,3 +1,4 @@
+// TODO: PRIORITY - Use stable endpoints to fetch users saved shows, then fetch episodes for those shows. (Fetching user's saved shows is beta endpoint)
 // TODO: Fetch more songs so it can make really long playlists
 
 import { useEffect } from "react";
