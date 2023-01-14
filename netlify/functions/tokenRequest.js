@@ -1,8 +1,8 @@
 // need this because I'll be using my client ID and client secret
 import fetch from 'node-fetch'
 
-clientID = process.env.CLIENT_ID
-clientSecret = process.env.CLIENT_SECRET
+const clientID = process.env.CLIENT_ID
+const clientSecret = process.env.CLIENT_SECRET
 
 exports.handler = async function(event, context) {
     const eventBody = JSON.parse(event.body)
