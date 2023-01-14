@@ -40,11 +40,15 @@ export default function SpotifyFetcher({userConfig, setFetchedItems}) {
         })))
         .then((arr) => {
             let episodeList = []
-            arr.slice(1).forEach((show) => {
-                show.forEach((episode) => {
-                    episodeList.push(episode)
+            if (fetchList.length > 1) {
+                arr.slice(1).forEach((show) => {
+                    show.forEach((episode) => {
+                        episodeList.push(episode)
+                    })
                 })
-            })
+            } else {
+                episodeList.push(arr[1])
+            }
             setFetchedItems({
                 'songList': arr[0]
                 , 'episodeList': episodeList
